@@ -167,6 +167,14 @@ const Layout = () => {
           </div>
         </div>
       </div>
+      {/* Footer */}
+      <footer className="w-full bg-base-200 text-base-content text-center py-4 mt-8 border-t border-base-300 text-sm">
+        <span>
+          While Andrew Kemler is affiliated with New York Life, this website was
+          independently commissioned and is not an official New York Life
+          website.
+        </span>
+      </footer>
     </div>
   );
 };
