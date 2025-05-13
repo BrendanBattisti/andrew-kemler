@@ -6,45 +6,31 @@ const Layout = () => {
   const productsRef = useRef(null);
   const contactRef = useRef(null);
 
-  const [progress, setProgress] = useState(1);
-  const [seenTop, setSeenTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (aboutRef.current) {
-        const aboutTop = aboutRef.current.getBoundingClientRect().top - 25;
-        const fadeDistance = 200;
-        const newProgress = Math.max(0, Math.min(1, aboutTop / fadeDistance));
-        setProgress(newProgress);
-
-        if (progress == 0) {
-          setSeenTop(true);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const opacity = progress;
-  const translateY = -40 * (1 - progress);
-
   return (
     <div>
       <div
-        className={`navbar bg-base-100 shadow-md z-50 ${
-          seenTop ? "fixed top-0 left-0" : ""
-        } w-full`}
+        className="navbar bg-base-100 shadow-md z-50 w-full"
         style={{
           transition: "opacity 0.2s, transform 0.2s",
-          opacity,
-          pointerEvents: opacity > 0.05 ? "auto" : "none",
-          transform: `translateY(${translateY}px)`,
         }}
       >
-        <div className="flex-1 text-2xl font-bold">Andrew Kemler</div>
+        <div className="flex-1 flex items-center text-2xl font-bold">
+          <a
+            href="https://www.newyorklife.com/agent/abkemler"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-4"
+            aria-label="New York Life - Andrew Kemler"
+          >
+            <img
+              src="/nyl-logo-1.svg"
+              alt="New York Life Logo"
+              className="h-8 w-8 mr-2"
+              style={{ borderRadius: "4px" }}
+            />
+          </a>
+          Andrew Kemler
+        </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li className="mx-2">
@@ -177,24 +163,6 @@ const Layout = () => {
               <div className="alert bg-base-200 text-base-content border-0 mt-4">
                 Please reach out by phone or email for all inquiries.
               </div>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
             </div>
           </div>
         </div>
