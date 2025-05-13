@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/andrewkemler-site/static/css/main.3d2c963e.css",
-    "main.js": "/andrewkemler-site/static/js/main.e8a695a3.js",
-    "static/js/453.480838cb.chunk.js": "/andrewkemler-site/static/js/453.480838cb.chunk.js",
-    "static/media/nyl-logo-1.svg": "/andrewkemler-site/static/media/nyl-logo-1.7be155e2d3290189788591901de15e07.svg",
-    "index.html": "/andrewkemler-site/index.html",
-    "main.3d2c963e.css.map": "/andrewkemler-site/static/css/main.3d2c963e.css.map",
-    "main.e8a695a3.js.map": "/andrewkemler-site/static/js/main.e8a695a3.js.map",
-    "453.480838cb.chunk.js.map": "/andrewkemler-site/static/js/453.480838cb.chunk.js.map"
+    "main.css": "/andrew-kemler/static/css/main.3d2c963e.css",
+    "main.js": "/andrew-kemler/static/js/main.f5c91861.js",
+    "static/js/453.480838cb.chunk.js": "/andrew-kemler/static/js/453.480838cb.chunk.js",
+    "static/media/nyl-logo-1.svg": "/andrew-kemler/static/media/nyl-logo-1.7be155e2d3290189788591901de15e07.svg",
+    "index.html": "/andrew-kemler/index.html",
+    "main.3d2c963e.css.map": "/andrew-kemler/static/css/main.3d2c963e.css.map",
+    "main.f5c91861.js.map": "/andrew-kemler/static/js/main.f5c91861.js.map",
+    "453.480838cb.chunk.js.map": "/andrew-kemler/static/js/453.480838cb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d2c963e.css",
-    "static/js/main.e8a695a3.js"
+    "static/js/main.f5c91861.js"
   ]
 }
