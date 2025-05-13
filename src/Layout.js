@@ -1,7 +1,4 @@
 import { useRef } from "react";
-import logo from "./nyl-logo-1.svg";
-import background from "./imgs/background.webp";
-import andrew from "./imgs/andrew.webp";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const Layout = () => {
@@ -28,7 +25,7 @@ const Layout = () => {
             aria-label="New York Life - Andrew Kemler"
           >
             <img
-              src={logo}
+              src={process.env.PUBLIC_URL + "/imgs/nyl-logo-1.svg"}
               alt="New York Life Logo"
               className="h-8 w-8 mr-2"
               style={{ borderRadius: "4px" }}
@@ -64,10 +61,12 @@ const Layout = () => {
         </div>
       </div>
       <div>
-        <section
+        <h2
           className="hero min-h-[95vh]"
           style={{
-            backgroundImage: `url(${background})`,
+            backgroundImage: `url(${
+              process.env.PUBLIC_URL + "/imgs/background.webp"
+            })`,
           }}
           aria-label="Hero section with introduction"
         >
@@ -94,7 +93,7 @@ const Layout = () => {
               </button>
             </div>
           </div>
-        </section>
+        </h2>
       </div>
       <div
         className="hero  min-h-[95vh]"
@@ -110,14 +109,15 @@ const Layout = () => {
             <div className="card-body">
               <div className="flex flex-row">
                 <img
-                  src={andrew}
-                  alt="Andrew and his dog Forest"
+                  src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
+                  alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
                   className="w-2/5 rounded-full m-10 "
+                  loading="lazy"
                 />
                 <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh]">
                   <div>
                     <h2 className="text-3xl font-bold mb-4 indent-6">
-                      Who am I?
+                      Meet Andrew Kemler
                     </h2>
                   </div>
                   <div>
@@ -211,7 +211,7 @@ const Layout = () => {
                 </div>
               </div>
               <div
-                className="alert alert-info text-sm mt-"
+                className="alert alert-info text-sm mt-4"
                 aria-label="Contact instructions"
               >
                 Please reach out by phone or email for all inquiries.
