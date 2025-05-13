@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
+import logo from "./nyl-logo-1.svg";
 
 const Layout = () => {
   const aboutRef = useRef(null);
@@ -23,7 +23,7 @@ const Layout = () => {
             aria-label="New York Life - Andrew Kemler"
           >
             <img
-              src="/nyl-logo-1.svg"
+              src={logo}
               alt="New York Life Logo"
               className="h-8 w-8 mr-2"
               style={{ borderRadius: "4px" }}
@@ -43,7 +43,7 @@ const Layout = () => {
                 About
               </button>
             </li>
-            <li className="mx-2">
+            {/* <li className="mx-2">
               <button
                 onClick={() =>
                   productsRef.current.scrollIntoView({ behavior: "smooth" })
@@ -52,7 +52,7 @@ const Layout = () => {
               >
                 Our Products
               </button>
-            </li>
+            </li> */}
             <li className="mx-2">
               <button
                 onClick={() =>
