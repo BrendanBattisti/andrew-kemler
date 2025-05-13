@@ -29,7 +29,7 @@ const Layout = () => {
               style={{ borderRadius: "4px" }}
             />
           </a>
-          Andrew Kemler
+          <span className="hidden md:inline">Andrew Kemler</span>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
@@ -68,7 +68,7 @@ const Layout = () => {
       </div>
       <div>
         <section
-          className="hero min-h-[85vh]"
+          className="hero min-h-[95vh]"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80')",
