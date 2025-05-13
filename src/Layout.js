@@ -147,28 +147,77 @@ const Layout = () => {
         </div>
       </div>
       <div id="contact" ref={contactRef}>
-        <div className="flex flex-col items-center justify-center min-h-[60vh] bg-base-100 p-8">
+        <div className="flex flex-col items-center justify-center min-h-[80vh] bg-base-100 p-8">
           <div className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200">
             <div className="card-body">
               <h1 className="card-title text-3xl font-bold text-base-content mb-4">
                 Let's get started.
               </h1>
-              <div className="mb-4">
-                <p className="font-semibold text-base-content flex items-center">
+
+              <div className="flex flex-col">
+                <div className="flex flex-row items-center">
+                  <div className="h-full flex items-center">
+                    <FaMapMarkerAlt className="mr-2" />
+                  </div>
+                  <div>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=209+HIGH+POINT+DRIVE+VICTOR+NY+14564"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      209 HIGH POINT DRIVE STE 310
+                      <br />
+                      NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
+                    </a>
+                  </div>
+                </div>
+                <div className="flex flex-row items-center">
+                  <div className="h-full flex items-center">
+                    <FaPhoneAlt className="mr-2" />
+                  </div>
+                  <div>
+                    <a
+                      href="tel:5856909288"
+                      className="text-primary hover:underline"
+                    >
+                      585-690-9288
+                    </a>
+                  </div>
+                </div>
+                <div className="flex flex-row items-center">
+                  <div className="h-full flex items-center">
+                    <FaEnvelope className="mr-2" />
+                  </div>
+                  <div>
+                    <a
+                      href="mailto:abkemler@ft.newyorklife.com"
+                      className="text-primary hover:underline"
+                    >
+                      abkemler@ft.newyorklife.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="alert alert-info text-sm mt-">
+                Please reach out by phone or email for all inquiries.
+              </div>
+
+              {/* <div className="mb-4">
+                <p className="text-base-content flex items-center">
                   <FaMapMarkerAlt className="mr-2" />
                   <a
                     href="https://www.google.com/maps/search/?api=1&query=209+HIGH+POINT+DRIVE+VICTOR+NY+14564"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary underline"
+                    className="text-primary hover:underline"
                   >
                     209 HIGH POINT DRIVE STE 310
                     <br />
                     NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
                   </a>
                 </p>
-              </div>
-              <div className="mb-4">
+
                 <p className="flex items-center">
                   <FaPhoneAlt className="mr-2" />
                   <a
@@ -190,7 +239,7 @@ const Layout = () => {
               </div>
               <div className="alert alert-info text-sm mt-">
                 Please reach out by phone or email for all inquiries.
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
