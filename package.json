@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
     "react": "^19.1.0",
@@ -22,7 +23,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:css": "postcss src/input.css -o src/output.css"
+    "build:css": "postcss src/input.css -o src/output.css",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +47,6 @@
   },
   "devDependencies": {
     "daisyui": "^5.0.35"
-  }
+  },
+  "homepage": "https://brendanbattisti.github.io/andrewkemler-site/"
 }
