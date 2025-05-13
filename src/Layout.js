@@ -6,13 +6,13 @@ import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const Layout = () => {
   const aboutRef = useRef(null);
-  const productsRef = useRef(null);
+  // const productsRef = useRef(null);
   const contactRef = useRef(null);
 
   return (
     <div>
       <div
-        className="navbar bg-base-100 shadow-md z-50 w-full"
+        className="navbar bg-base-100 shadow-md z-50 w-full md:ml-4"
         style={{
           transition: "opacity 0.2s, transform 0.2s",
           background:
@@ -44,26 +44,18 @@ const Layout = () => {
                   aboutRef.current.scrollIntoView({ behavior: "smooth" })
                 }
                 className="btn btn-ghost"
+                aria-label="Scroll to About section"
               >
                 About
               </button>
             </li>
-            {/* <li className="mx-2">
-              <button
-                onClick={() =>
-                  productsRef.current.scrollIntoView({ behavior: "smooth" })
-                }
-                className="btn btn-ghost"
-              >
-                Our Products
-              </button>
-            </li> */}
             <li className="mx-2">
               <button
                 onClick={() =>
                   contactRef.current.scrollIntoView({ behavior: "smooth" })
                 }
                 className="btn btn-primary text-white"
+                aria-label="Scroll to Get Started contact section"
               >
                 Get Started
               </button>
@@ -77,6 +69,7 @@ const Layout = () => {
           style={{
             backgroundImage: `url(${background})`,
           }}
+          aria-label="Hero section with introduction"
         >
           <div
             className="hero-overlay"
@@ -110,6 +103,7 @@ const Layout = () => {
           background:
             "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
         }}
+        aria-label="About Andrew Kemler section"
       >
         <div className="hero-content min-h-full">
           <div className="card shadow-xl bg-base-100 border border-base-200">
@@ -152,7 +146,7 @@ const Layout = () => {
           </div>
         </div>
       </div>
-      <div id="contact" ref={contactRef}>
+      <div id="contact" ref={contactRef} aria-label="Contact section">
         <div
           className="flex flex-col items-center justify-center min-h-[90vh] p-8"
           style={{
@@ -160,7 +154,10 @@ const Layout = () => {
               "linear-gradient(30deg, #f8fafc 0%, rgb(162, 168, 176) 100%)",
           }}
         >
-          <div className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200">
+          <div
+            className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200"
+            aria-label="Contact information card"
+          >
             <div className="card-body">
               <h1 className="card-title text-3xl font-bold text-base-content mb-4">
                 Let's get started.
@@ -176,6 +173,7 @@ const Layout = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:underline"
+                      aria-label="View office location on Google Maps"
                     >
                       209 HIGH POINT DRIVE STE 310
                       <br />
@@ -191,6 +189,7 @@ const Layout = () => {
                     <a
                       href="tel:5856909288"
                       className="text-primary hover:underline"
+                      aria-label="Call 585-690-9288"
                     >
                       585-690-9288
                     </a>
@@ -204,13 +203,17 @@ const Layout = () => {
                     <a
                       href="mailto:abkemler@ft.newyorklife.com"
                       className="text-primary hover:underline"
+                      aria-label="Send email to abkemler@ft.newyorklife.com"
                     >
                       abkemler@ft.newyorklife.com
                     </a>
                   </div>
                 </div>
               </div>
-              <div className="alert alert-info text-sm mt-">
+              <div
+                className="alert alert-info text-sm mt-"
+                aria-label="Contact instructions"
+              >
                 Please reach out by phone or email for all inquiries.
               </div>
             </div>
@@ -218,7 +221,10 @@ const Layout = () => {
         </div>
       </div>
       {/* Footer */}
-      <footer className="w-full bg-base-200 text-base-content text-center py-4 border-t border-base-300 text-sm">
+      <footer
+        className="w-full bg-base-200 text-base-content text-center py-4 border-t border-base-300 text-sm"
+        aria-label="Site disclaimer and copyright"
+      >
         <span>
           While Andrew Kemler is affiliated with New York Life, this website was
           independently commissioned and is not an official New York Life
