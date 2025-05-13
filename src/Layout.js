@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import logo from "./nyl-logo-1.svg";
+import background from "./imgs/background.webp";
+import andrew from "./imgs/andrew.webp";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const Layout = () => {
   const aboutRef = useRef(null);
@@ -12,6 +15,8 @@ const Layout = () => {
         className="navbar bg-base-100 shadow-md z-50 w-full"
         style={{
           transition: "opacity 0.2s, transform 0.2s",
+          background:
+            "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
         }}
       >
         <div className="flex-1 flex items-center text-2xl font-bold">
@@ -70,8 +75,7 @@ const Layout = () => {
         <section
           className="hero min-h-[95vh]"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80')",
+            backgroundImage: `url(${background})`,
           }}
         >
           <div
@@ -93,58 +97,55 @@ const Layout = () => {
                 }
                 className="btn btn-primary"
               >
-                Learn More About Us
+                Learn More
               </button>
             </div>
           </div>
         </section>
       </div>
-      <div id="about" ref={aboutRef}>
-        <div className="max-w-4xl mx-auto py-12 px-4 flex flex-col md:flex-row items-center gap-8">
-          {/* Image Column */}
-          <div className="flex-shrink-0 w-full md:w-1/2 flex justify-center">
-            <img
-              src="https://media.istockphoto.com/id/463744865/photo/old-fashioned-calculator.jpg?s=612x612&w=0&k=20&c=BiXVse9hxdgsvROvrzRB4NB42OnR0bAJllGV-PZQgTQ="
-              alt="Andrew Kemler"
-              className="rounded-xl shadow-lg w-64 h-64 object-cover"
-            />
-          </div>
-          {/* Text Column */}
-          <div className="w-full md:w-1/2 text-center md:text-left">
-            <h2 className="text-4xl font-bold mb-4 text-base-content">
-              About Me
-            </h2>
-            <p className="text-lg text-base-content mb-4">
-              Hi, I'm Andrew Kemler, a financial advisor with New York Life,
-              proudly serving the Rochester, New York community. Helping
-              individuals and families build secure financial futures isn't just
-              my profession — it's something I truly care about. I bring a
-              personal, thoughtful approach to every client relationship, always
-              aiming to provide guidance with integrity and clarity.
-            </p>
-            <p className="text-lg text-base-content mb-4">
-              When I'm not working with clients, I'm usually spending time with
-              my fiancée, Kaylie, and our energetic corgi, Forest. Whether I'm
-              at the office or at home, I try to bring the same sense of purpose
-              and positivity to everything I do.
-            </p>
+      <div
+        className="hero  min-h-[95vh]"
+        ref={aboutRef}
+        style={{
+          background:
+            "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
+        }}
+      >
+        <div className="hero-content min-h-full">
+          <div className="card shadow-xl bg-base-100 border border-base-200 min-h-[80vh]">
+            <div className="card-body">
+              <div className="flex flex-row">
+                <div className="w-1/2 flex flex-col items-center justify-center h-full">
+                  <img
+                    src={andrew}
+                    alt="Andrew and his dog Forest"
+                    className="w-1/2 rounded-full"
+                  />
+                </div>
+                <div className="flex flex-col w-1/2 text-base-content mb-4 justify-between h-full">
+                  <h2 className="text-3xl font-bold">Who am I?</h2>
+
+                  <p className="text-lg indent-6">
+                    Hi, I'm Andrew Kemler, a financial advisor with New York
+                    Life, proudly serving the Rochester, New York community.
+                    Helping individuals and families build secure financial
+                    futures isn't just my profession — it's something I truly
+                    care about. I bring a personal, thoughtful approach to every
+                    client relationship, always aiming to provide guidance with
+                    integrity and clarity.
+                  </p>
+                  <p className="text-lg">
+                    When I'm not working with clients, I'm usually spending time
+                    with my fiancée, Kaylie, and our energetic corgi, Forest.
+                    Whether I'm at the office or at home, I try to bring the
+                    same sense of purpose and positivity to everything I do.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div id="products" ref={productsRef}>
-        {/* <h1>Products</h1>
-        <p>
-          Learn more about{" "}
-          <a
-            href="https://www.newyorklife.com/products/insurance/term-life"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Term Life Insurance from New York Life
-          </a>
-          .
-        </p> */}
-      </div>{" "}
       <div id="contact" ref={contactRef}>
         <div className="flex flex-col items-center justify-center min-h-[60vh] bg-base-100 p-8">
           <div className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200">
@@ -153,43 +154,41 @@ const Layout = () => {
                 Let's get started.
               </h1>
               <div className="mb-4">
-                <p className="font-semibold text-base-content">Address:</p>
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=209+HIGH+POINT+DRIVE+VICTOR+NY+14564"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline text-base-content hover:text-base-content"
-                >
-                  209 HIGH POINT DRIVE STE 310
-                  <br />
-                  NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
-                </a>
+                <p className="font-semibold text-base-content flex items-center">
+                  <FaMapMarkerAlt className="mr-2" />
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=209+HIGH+POINT+DRIVE+VICTOR+NY+14564"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline"
+                  >
+                    209 HIGH POINT DRIVE STE 310
+                    <br />
+                    NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
+                  </a>
+                </p>
               </div>
               <div className="mb-4">
-                <p>
-                  <span className="font-semibold text-base-content">
-                    Phone:
-                  </span>{" "}
+                <p className="flex items-center">
+                  <FaPhoneAlt className="mr-2" />
                   <a
                     href="tel:5856909288"
-                    className="underline text-base-content hover:text-base-content"
+                    className="text-primary hover:underline"
                   >
                     585-690-9288
                   </a>
                 </p>
-                <p>
-                  <span className="font-semibold text-base-content">
-                    Email:
-                  </span>{" "}
+                <p className="flex items-center">
+                  <FaEnvelope className="mr-2" />
                   <a
                     href="mailto:abkemler@ft.newyorklife.com"
-                    className="underline text-base-content hover:text-base-content"
+                    className="text-primary hover:underline"
                   >
                     abkemler@ft.newyorklife.com
                   </a>
                 </p>
               </div>
-              <div className="alert bg-base-200 text-base-content border-0 mt-4">
+              <div className="alert alert-info text-sm mt-">
                 Please reach out by phone or email for all inquiries.
               </div>
             </div>
