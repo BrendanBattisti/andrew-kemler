@@ -112,34 +112,40 @@ const Layout = () => {
         }}
       >
         <div className="hero-content min-h-full">
-          <div className="card shadow-xl bg-base-100 border border-base-200 min-h-[80vh]">
+          <div className="card shadow-xl bg-base-100 border border-base-200">
             <div className="card-body">
               <div className="flex flex-row">
-                <div className="w-1/2 flex flex-col items-center justify-center h-full">
-                  <img
-                    src={andrew}
-                    alt="Andrew and his dog Forest"
-                    className="w-1/2 rounded-full"
-                  />
-                </div>
-                <div className="flex flex-col w-1/2 text-base-content mb-4 justify-between h-full">
-                  <h2 className="text-3xl font-bold">Who am I?</h2>
-
-                  <p className="text-lg indent-6">
-                    Hi, I'm Andrew Kemler, a financial advisor with New York
-                    Life, proudly serving the Rochester, New York community.
-                    Helping individuals and families build secure financial
-                    futures isn't just my profession — it's something I truly
-                    care about. I bring a personal, thoughtful approach to every
-                    client relationship, always aiming to provide guidance with
-                    integrity and clarity.
-                  </p>
-                  <p className="text-lg">
-                    When I'm not working with clients, I'm usually spending time
-                    with my fiancée, Kaylie, and our energetic corgi, Forest.
-                    Whether I'm at the office or at home, I try to bring the
-                    same sense of purpose and positivity to everything I do.
-                  </p>
+                <img
+                  src={andrew}
+                  alt="Andrew and his dog Forest"
+                  className="w-2/5 rounded-full m-10 "
+                />
+                <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh]">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-4 indent-6">
+                      Who am I?
+                    </h2>
+                  </div>
+                  <div>
+                    <p className="text-lg indent-6">
+                      Hi, I'm Andrew Kemler, a financial advisor with New York
+                      Life, proudly serving the Rochester, New York community.
+                      Helping individuals and families build secure financial
+                      futures isn't just my profession — it's something I truly
+                      care about. I bring a personal, thoughtful approach to
+                      every client relationship, always aiming to provide
+                      guidance with integrity and clarity.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-lg">
+                      When I'm not working with clients, I'm usually spending
+                      time with my fiancée, Kaylie, and our energetic corgi,
+                      Forest. Whether I'm at the office or at home, I try to
+                      bring the same sense of purpose and positivity to
+                      everything I do.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -147,15 +153,20 @@ const Layout = () => {
         </div>
       </div>
       <div id="contact" ref={contactRef}>
-        <div className="flex flex-col items-center justify-center min-h-[80vh] bg-base-100 p-8">
+        <div
+          className="flex flex-col items-center justify-center min-h-[90vh] p-8"
+          style={{
+            background:
+              "linear-gradient(30deg, #f8fafc 0%, rgb(162, 168, 176) 100%)",
+          }}
+        >
           <div className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200">
             <div className="card-body">
               <h1 className="card-title text-3xl font-bold text-base-content mb-4">
                 Let's get started.
               </h1>
-
               <div className="flex flex-col">
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center mb-2">
                   <div className="h-full flex items-center">
                     <FaMapMarkerAlt className="mr-2" />
                   </div>
@@ -172,7 +183,7 @@ const Layout = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center mb-2">
                   <div className="h-full flex items-center">
                     <FaPhoneAlt className="mr-2" />
                   </div>
@@ -185,7 +196,7 @@ const Layout = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center mb-2">
                   <div className="h-full flex items-center">
                     <FaEnvelope className="mr-2" />
                   </div>
@@ -202,50 +213,12 @@ const Layout = () => {
               <div className="alert alert-info text-sm mt-">
                 Please reach out by phone or email for all inquiries.
               </div>
-
-              {/* <div className="mb-4">
-                <p className="text-base-content flex items-center">
-                  <FaMapMarkerAlt className="mr-2" />
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=209+HIGH+POINT+DRIVE+VICTOR+NY+14564"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    209 HIGH POINT DRIVE STE 310
-                    <br />
-                    NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
-                  </a>
-                </p>
-
-                <p className="flex items-center">
-                  <FaPhoneAlt className="mr-2" />
-                  <a
-                    href="tel:5856909288"
-                    className="text-primary hover:underline"
-                  >
-                    585-690-9288
-                  </a>
-                </p>
-                <p className="flex items-center">
-                  <FaEnvelope className="mr-2" />
-                  <a
-                    href="mailto:abkemler@ft.newyorklife.com"
-                    className="text-primary hover:underline"
-                  >
-                    abkemler@ft.newyorklife.com
-                  </a>
-                </p>
-              </div>
-              <div className="alert alert-info text-sm mt-">
-                Please reach out by phone or email for all inquiries.
-              </div> */}
             </div>
           </div>
         </div>
       </div>
       {/* Footer */}
-      <footer className="w-full bg-base-200 text-base-content text-center py-4 mt-8 border-t border-base-300 text-sm">
+      <footer className="w-full bg-base-200 text-base-content text-center py-4 border-t border-base-300 text-sm">
         <span>
           While Andrew Kemler is affiliated with New York Life, this website was
           independently commissioned and is not an official New York Life
