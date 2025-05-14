@@ -7,13 +7,21 @@ const Layout = () => {
   const contactRef = useRef(null);
 
   return (
-    <div>
+    <div
+      style={{
+        scrollSnapType: "y proximity",
+        overflowY: "auto",
+        height: "100vh",
+        scrollBehavior: "smooth",
+      }}
+    >
       <div
         className="navbar bg-base-100 shadow-md z-50 w-full md:ml-4"
         style={{
           transition: "opacity 0.2s, transform 0.2s",
           background:
-            "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
+            "linear-gradient(30deg, #f8fafc 0%,rgb(214, 221, 230) 100%)",
+          scrollSnapAlign: "start",
         }}
       >
         <div className="flex-1 flex items-center text-2xl font-bold">
@@ -46,7 +54,7 @@ const Layout = () => {
                 About
               </button>
             </li>
-            <li className="mx-2">
+            <li className="mx-2 mr-4">
               <button
                 onClick={() =>
                   contactRef.current.scrollIntoView({ behavior: "smooth" })
@@ -60,7 +68,11 @@ const Layout = () => {
           </ul>
         </div>
       </div>
-      <div>
+      <div
+        style={{
+          scrollSnapAlign: "start",
+        }}
+      >
         <h2
           className="hero min-h-[95vh]"
           style={{
@@ -96,11 +108,12 @@ const Layout = () => {
         </h2>
       </div>
       <div
-        className="hero  min-h-[95vh]"
+        className="hero min-h-[100vh]"
         ref={aboutRef}
         style={{
           background:
             "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
+          scrollSnapAlign: "start",
         }}
         aria-label="About Andrew Kemler section"
       >
@@ -150,9 +163,16 @@ const Layout = () => {
           </div>
         </div>
       </div>
-      <div id="contact" ref={contactRef} aria-label="Contact section">
+      <div
+        id="contact"
+        ref={contactRef}
+        aria-label="Contact section"
+        style={{
+          scrollSnapAlign: "start",
+        }}
+      >
         <div
-          className="flex flex-col items-center justify-center min-h-[90vh] p-8"
+          className="flex flex-col items-center justify-center min-h-[100vh] p-8"
           style={{
             background:
               "linear-gradient(30deg, #f8fafc 0%, rgb(162, 168, 176) 100%)",
@@ -228,6 +248,9 @@ const Layout = () => {
       <footer
         className="w-full bg-base-200 text-base-content text-center py-4 border-t border-base-300 text-sm"
         aria-label="Site disclaimer and copyright"
+        style={{
+          scrollSnapAlign: "start",
+        }}
       >
         <span>
           While Andrew Kemler is affiliated with New York Life, this website was
