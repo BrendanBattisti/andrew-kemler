@@ -107,38 +107,42 @@ const Layout = () => {
         <div className="hero-content min-h-full">
           <div className="card shadow-xl bg-base-100 border border-base-200">
             <div className="card-body">
-              <div className="flex flex-row">
-                <img
-                  src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
-                  alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
-                  className="w-2/5 rounded-full m-10 "
-                  loading="lazy"
-                />
-                <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh]">
-                  <div>
-                    <h2 className="text-3xl font-bold mb-4 indent-6">
-                      Meet Andrew Kemler
-                    </h2>
+              <div className="h-4/5 m-auto">
+                <div className="flex flex-row">
+                  <div className="w-1/2 flex items-center border-r border-gray-200">
+                    <img
+                      src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
+                      alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
+                      className="m-10 rounded-box m-auto"
+                      loading="lazy"
+                    />
                   </div>
-                  <div>
-                    <p className="text-lg indent-6">
-                      Hi, I'm Andrew Kemler, a financial advisor with New York
-                      Life, proudly serving the Rochester, New York community.
-                      Helping individuals and families build secure financial
-                      futures isn't just my profession — it's something I truly
-                      care about. I bring a personal, thoughtful approach to
-                      every client relationship, always aiming to provide
-                      guidance with integrity and clarity.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-lg">
-                      When I'm not working with clients, I'm usually spending
-                      time with my fiancée, Kaylie, and our energetic corgi,
-                      Forest. Whether I'm at the office or at home, I try to
-                      bring the same sense of purpose and positivity to
-                      everything I do.
-                    </p>
+                  <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh] pl-10">
+                    <div>
+                      <h2 className="text-3xl font-bold mb-4 indent-6">
+                        Meet Andrew Kemler
+                      </h2>
+                    </div>
+                    <div>
+                      <p className="text-lg indent-6">
+                        Hi, I'm Andrew Kemler, a financial advisor with New York
+                        Life, proudly serving the Rochester, New York community.
+                        Helping individuals and families build secure financial
+                        futures isn't just my profession — it's something I
+                        truly care about. I bring a personal, thoughtful
+                        approach to every client relationship, always aiming to
+                        provide guidance with integrity and clarity.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-lg">
+                        When I'm not working with clients, I'm usually spending
+                        time with my fiancée, Kaylie, and our energetic corgi,
+                        Forest. Whether I'm at the office or at home, I try to
+                        bring the same sense of purpose and positivity to
+                        everything I do.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
