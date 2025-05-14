@@ -575,9 +575,6 @@
     gap: calc(0.25rem * 4);
     padding: calc(0.25rem * 4);
   }
-  .z-50 {
-    z-index: 50;
-  }
   .hero {
     display: grid;
     width: 100%;
@@ -918,11 +915,6 @@
       @media (hover: hover) {
         text-decoration-line: underline;
       }
-    }
-  }
-  .md\:ml-4 {
-    @media (width >= 48rem) {
-      margin-left: calc(var(--spacing) * 4);
     }
   }
   .md\:inline {

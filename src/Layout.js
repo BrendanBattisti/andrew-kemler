@@ -3,7 +3,6 @@ import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const Layout = () => {
   const aboutRef = useRef(null);
-  // const productsRef = useRef(null);
   const contactRef = useRef(null);
 
   return (
@@ -16,7 +15,7 @@ const Layout = () => {
       }}
     >
       <div
-        className="navbar bg-base-100 shadow-md z-50 w-full md:ml-4"
+        className="navbar bg-base-100 shadow-md w-full"
         style={{
           transition: "opacity 0.2s, transform 0.2s",
           background:
@@ -138,13 +137,13 @@ const Layout = () => {
                     </div>
                     <div>
                       <p className="text-lg indent-6">
-                        Hi, I'm Andrew Kemler, a financial advisor with New York
-                        Life, proudly serving the Rochester, New York community.
-                        Helping individuals and families build secure financial
-                        futures isn't just my profession — it's something I
-                        truly care about. I bring a personal, thoughtful
-                        approach to every client relationship, always aiming to
-                        provide guidance with integrity and clarity.
+                        Hi, I'm Andrew, a financial advisor with New York Life,
+                        proudly serving the Rochester community. Helping
+                        individuals and families build secure financial futures
+                        isn't just my profession — it's something I truly care
+                        about. I bring a personal, thoughtful approach to every
+                        client relationship, always aiming to provide guidance
+                        with integrity and clarity.
                       </p>
                     </div>
                     <div>
