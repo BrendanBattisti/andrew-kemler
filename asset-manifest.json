@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/andrew-kemler/static/css/main.f102635e.css",
-    "main.js": "/andrew-kemler/static/js/main.f4e03988.js",
+    "main.css": "/andrew-kemler/static/css/main.fdfbec26.css",
+    "main.js": "/andrew-kemler/static/js/main.ce297ebe.js",
     "static/js/453.480838cb.chunk.js": "/andrew-kemler/static/js/453.480838cb.chunk.js",
     "index.html": "/andrew-kemler/index.html",
-    "main.f102635e.css.map": "/andrew-kemler/static/css/main.f102635e.css.map",
-    "main.f4e03988.js.map": "/andrew-kemler/static/js/main.f4e03988.js.map",
+    "main.fdfbec26.css.map": "/andrew-kemler/static/css/main.fdfbec26.css.map",
+    "main.ce297ebe.js.map": "/andrew-kemler/static/js/main.ce297ebe.js.map",
     "453.480838cb.chunk.js.map": "/andrew-kemler/static/js/453.480838cb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f102635e.css",
-    "static/js/main.f4e03988.js"
+    "static/css/main.fdfbec26.css",
+    "static/js/main.ce297ebe.js"
   ]
 }
