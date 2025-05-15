@@ -5,6 +5,24 @@ const Layout = () => {
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
 
+  // Content variables
+  const title_text = "Secure Your Financial Future";
+  const title_description =
+    "Empowering you with the knowledge and tools to achieve lasting financial security and peace of mind.";
+  const button_text = "Learn More";
+
+  const about_title = "Meet Andrew Kemler";
+  const about_text =
+    "Hi, I'm Andrew, a financial advisor with New York Life, proudly serving the Rochester community. Helping individuals and families build secure financial futures isn't just my profession — it's something I truly care about. I bring a personal, thoughtful approach to every client relationship, always aiming to provide guidance with integrity and clarity.";
+  const about_text_2 =
+    "When I'm not working with clients, I'm usually spending time with my fiancée, Kaylie, and our energetic corgi, Forest. Whether I'm at the office or at home, I try to bring the same sense of purpose and positivity to everything I do.";
+
+  const contact_title = "Let's get started.";
+  const contact_phone = "585-690-9288";
+  const contact_email = "abkemler@ft.newyorklife.com";
+  const contact_address =
+    "209 HIGH POINT DRIVE STE 310, VICTOR, NEW YORK 14564";
+
   return (
     <div
       style={{
@@ -88,26 +106,47 @@ const Layout = () => {
           <div className="hero-content text-center">
             <div className="max-w-xl mx-auto">
               <h1 className="mb-5 text-5xl font-bold text-gray-100">
-                Secure Your Financial Future
+                {title_text}
               </h1>
-              <p className="mb-5 text-lg text-gray-300">
-                Empowering you with the knowledge and tools to achieve lasting
-                financial security and peace of mind.
-              </p>
+              <p className="mb-5 text-lg text-gray-300">{title_description}</p>
               <button
                 onClick={() =>
                   aboutRef.current.scrollIntoView({ behavior: "smooth" })
                 }
                 className="btn btn-primary"
               >
-                Learn More
+                {button_text}
               </button>
             </div>
           </div>
         </h2>
       </div>
       <div
-        className="hero min-h-[100vh]"
+        className="hero min-h-[100vh] md:hidden bg-base-100"
+        ref={aboutRef}
+        style={{
+          scrollSnapAlign: "start",
+        }}
+        aria-label="About Andrew Kemler section"
+      >
+        <div className="mx-auto w-4/5">
+          <div className="hero-content min-h-full w-full flex flex-col justify-evenly px-2 sm:px-4">
+            <img
+              src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
+              alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
+              className="rounded-full object-cover h-[20vh] mb-4"
+              loading="lazy"
+            />
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center">
+              {about_title}
+            </h2>
+            <p className="text-xl mb-3 text-center">{about_text}</p>
+            <p className="text-xl text-center">{about_text_2}</p>
+          </div>
+        </div>
+      </div>
+      <div
+        className="hero min-h-[100vh] hidden md:inline"
         ref={aboutRef}
         style={{
           background:
@@ -116,7 +155,7 @@ const Layout = () => {
         }}
         aria-label="About Andrew Kemler section"
       >
-        <div className="hero-content min-h-full">
+        <div className="hero-content min-h-full w-full">
           <div className="card shadow-xl bg-base-100 border border-base-200">
             <div className="card-body">
               <div className="h-4/5 m-auto">
@@ -132,28 +171,14 @@ const Layout = () => {
                   <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh] pl-10">
                     <div>
                       <h2 className="text-3xl font-bold mb-4 indent-6">
-                        Meet Andrew Kemler
+                        {about_title}
                       </h2>
                     </div>
                     <div>
-                      <p className="text-lg indent-6">
-                        Hi, I'm Andrew, a financial advisor with New York Life,
-                        proudly serving the Rochester community. Helping
-                        individuals and families build secure financial futures
-                        isn't just my profession — it's something I truly care
-                        about. I bring a personal, thoughtful approach to every
-                        client relationship, always aiming to provide guidance
-                        with integrity and clarity.
-                      </p>
+                      <p className="text-lg indent-6">{about_text}</p>
                     </div>
                     <div>
-                      <p className="text-lg">
-                        When I'm not working with clients, I'm usually spending
-                        time with my fiancée, Kaylie, and our energetic corgi,
-                        Forest. Whether I'm at the office or at home, I try to
-                        bring the same sense of purpose and positivity to
-                        everything I do.
-                      </p>
+                      <p className="text-lg">{about_text_2}</p>
                     </div>
                   </div>
                 </div>
@@ -183,7 +208,7 @@ const Layout = () => {
           >
             <div className="card-body">
               <h1 className="card-title text-3xl font-bold text-base-content mb-4">
-                Let's get started.
+                {contact_title}
               </h1>
               <div className="flex flex-col">
                 <div className="flex flex-row items-center mb-2">
@@ -198,7 +223,7 @@ const Layout = () => {
                       className="text-primary hover:underline"
                       aria-label="View office location on Google Maps"
                     >
-                      209 HIGH POINT DRIVE STE 310
+                      {contact_address.split(",")[0]}
                       <br />
                       NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
                     </a>
@@ -210,11 +235,11 @@ const Layout = () => {
                   </div>
                   <div>
                     <a
-                      href="tel:5856909288"
+                      href={`tel:${contact_phone.replace(/[^\d]/g, "")}`}
                       className="text-primary hover:underline"
-                      aria-label="Call 585-690-9288"
+                      aria-label={`Call ${contact_phone}`}
                     >
-                      585-690-9288
+                      {contact_phone}
                     </a>
                   </div>
                 </div>
@@ -224,11 +249,11 @@ const Layout = () => {
                   </div>
                   <div>
                     <a
-                      href="mailto:abkemler@ft.newyorklife.com"
+                      href={`mailto:${contact_email}`}
                       className="text-primary hover:underline"
-                      aria-label="Send email to abkemler@ft.newyorklife.com"
+                      aria-label={`Send email to ${contact_email}`}
                     >
-                      abkemler@ft.newyorklife.com
+                      {contact_email}
                     </a>
                   </div>
                 </div>
