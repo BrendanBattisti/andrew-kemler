@@ -1,9 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/src/SplitText";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+
 const Layout = () => {
+  //Navbar ref
+  const navbarRef = useRef(null);
+  const [navbarPosition, setNavbarPosition] = useState("absolute");
+  const [navbarHidden, setNavbarHidden] = useState(true);
+
   // Hero refs
   const heroRef = useRef(null);
   const heroSubtextRef = useRef(null);
@@ -15,104 +21,64 @@ const Layout = () => {
   const contactRef = useRef(null);
   const aboutAnchorRef = useRef(null);
 
-  const isMobile = window.innerWidth < 768;
-
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
     let split;
 
-    if (heroRef.current && heroSubtextRef.current) {
-      // Properly initialize SplitText
+    if (
+      heroRef.current &&
+      heroSubtextRef.current &&
+      learnMoreRef.current &&
+      navbarRef.current
+    ) {
       split = new SplitText(heroSubtextRef.current, {
         type: "words",
       });
 
-      // Hero title fade-in
-      gsap.from(heroRef.current, {
+      // Remove the hidden class just before animation starts
+      setNavbarHidden(false);
+
+      gsap.set(navbarRef.current, { y: -50, opacity: 0 });
+
+      const tl = gsap.timeline();
+
+      tl.from(heroRef.current, {
         delay: 0.5,
         opacity: 0,
         y: 50,
         duration: 2,
         ease: "power3.out",
-      });
-
-      // Animate each word
-      gsap.from(split.words, {
-        delay: 2.5,
-        y: -75,
-        opacity: 0,
-        duration: 0.8,
-        ease: "back.out(1.3)",
-        stagger: 0.15,
-      });
-
-      gsap.from(learnMoreRef.current, {
-        delay: 6,
-        opacity: 0,
-        y: 50,
-        duration: 2,
-        ease: "power3.out",
-      });
+      })
+        .from(
+          split.words,
+          {
+            y: -75,
+            opacity: 0,
+            duration: 0.8,
+            ease: "back.out(1.3)",
+            stagger: 0.15,
+          },
+          "-=0.5"
+        )
+        .from(learnMoreRef.current, {
+          opacity: 0,
+          y: 50,
+          duration: 2,
+          ease: "power3.out",
+        })
+        .to(navbarRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          onComplete: () => setNavbarPosition("fixed"),
+        });
     }
+
     // Animate about section based on layout
-    const aboutTarget = isMobile ? aboutRefMobile.current : aboutRef.current;
-
-    //   if (aboutTarget) {
-    //     gsap.from(aboutTarget, {
-    //       scrollTrigger: {
-    //         trigger: aboutTarget,
-    //         start: "top 80%",
-    //       },
-    //       opacity: 0,
-    //       y: 50,
-    //       duration: 1,
-    //       ease: "power2.out",
-    //     });
-    //   }
-
-    //   // Animate contact section
-    //   if (contactRef.current) {
-    //     gsap.from(contactRef.current, {
-    //       scrollTrigger: {
-    //         trigger: contactRef.current,
-    //         start: "top 85%",
-    //       },
-    //       opacity: 0,
-    //       y: 50,
-    //       duration: 1,
-    //       ease: "power2.out",
-    //     });
-    //   }
-
-    //   // Animate fade-up elements
-    //   gsap.utils.toArray(".fade-up").forEach((el) => {
-    //     gsap.from(el, {
-    //       scrollTrigger: {
-    //         trigger: el,
-    //         start: "top 90%",
-    //       },
-    //       opacity: 0,
-    //       y: 30,
-    //       duration: 0.8,
-    //       ease: "power1.out",
-    //     });
-    //   });
-    // }, [isMobile]);
-
-    // gsap.utils.toArray(".fade-up").forEach((el) => {
-    //   gsap.from(el, {
-    //     scrollTrigger: {
-    //       trigger: el,
-    //       start: "top 90%",
-    //     },
-    //     opacity: 0,
-    //     y: 30,
-    //     duration: 0.8,
-    //     ease: "power1.out",
-    //   });
-  });
-
+    // const aboutTarget = isMobile ? aboutRefMobile.current : aboutRef.current;
+  }, []);
   // Content variables
   const title_text = "Secure Your Financial Future";
   const title_description =
@@ -143,9 +109,16 @@ const Layout = () => {
       }}
     >
       <div
-        className="navbar bg-base-100 shadow-md w-full md:"
+        className={`navbar bg-base-100 shadow-md w-full transition-opacity transition-transform duration-200
+          ${navbarHidden ? "opacity-0 -translate-y-12" : ""}
+        `}
+        ref={navbarRef}
         style={{
-          transition: "opacity 0.2s, transform 0.2s",
+          position: navbarPosition,
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 50,
           background:
             "linear-gradient(30deg, #f8fafc 0%,rgb(214, 221, 230) 100%)",
           scrollSnapAlign: "start",
@@ -201,7 +174,7 @@ const Layout = () => {
         }}
       >
         <h2
-          className="hero min-h-[95vh]"
+          className="hero min-h-[100vh]"
           style={{
             backgroundImage: `url(${
               process.env.PUBLIC_URL + "/imgs/background.webp"
@@ -217,16 +190,14 @@ const Layout = () => {
             <div className="max-w-xl mx-auto">
               <div ref={heroRef}>
                 <h1
-                  className="text-5xl font-bold text-white"
-                  style={{ whiteSpace: "nowrap", marginBottom: "2rem" }}
+                  className="text-5xl font-bold text-white text-nowrap"
+                  style={{ marginBottom: "2rem" }}
                 >
                   {title_text}
                 </h1>
               </div>
               <div ref={heroSubtextRef}>
-                <p className="mb-8 text-lg text-gray-300 fade-up">
-                  {title_description}
-                </p>
+                <p className="text-lg text-gray-300">{title_description}</p>
               </div>
               <button
                 ref={learnMoreRef}
