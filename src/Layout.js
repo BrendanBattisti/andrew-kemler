@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/src/SplitText";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Layout = () => {
   //Navbar ref
@@ -16,10 +17,28 @@ const Layout = () => {
   const learnMoreRef = useRef(null);
 
   // About refs
-  const aboutRef = useRef(null);
-  const aboutRefMobile = useRef(null);
+
   const contactRef = useRef(null);
   const aboutAnchorRef = useRef(null);
+
+  // Responsive state
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    // Responsive handler
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Initial check (in case of SSR or hydration)
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -76,8 +95,7 @@ const Layout = () => {
         });
     }
 
-    // Animate about section based on layout
-    // const aboutTarget = isMobile ? aboutRefMobile.current : aboutRef.current;
+    // No need for aboutTarget anymore
   }, []);
   // Content variables
   const title_text = "Secure Your Financial Future";
@@ -139,7 +157,19 @@ const Layout = () => {
               style={{ borderRadius: "4px" }}
             />
           </a>
-          <span className="hidden md:inline">Andrew Kemler</span>
+          <AnimatePresence mode="wait">
+            {!isMobile && (
+              <motion.span
+                className="hidden md:inline"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                Andrew Kemler
+              </motion.span>
+            )}
+          </AnimatePresence>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
@@ -186,11 +216,11 @@ const Layout = () => {
             className="hero-overlay"
             style={{ backgroundColor: "rgba(30,41,59,0.7)" }}
           ></div>
-          <div className="hero-content text-center">
-            <div className="max-w-xl mx-auto">
+          <div className="hero-content text-center w-4/5">
+            <div className="w-full">
               <div ref={heroRef}>
                 <h1
-                  className="text-5xl font-bold text-white text-nowrap"
+                  className="text-5xl font-bold text-white w-full"
                   style={{ marginBottom: "2rem" }}
                 >
                   {title_text}
@@ -214,64 +244,65 @@ const Layout = () => {
         </h2>
       </div>
       <div ref={aboutAnchorRef} style={{ height: 0 }}></div>
-      <div
-        className="hero min-h-[100vh] md:hidden bg-base-100"
-        ref={aboutRefMobile}
-        style={{
-          scrollSnapAlign: "start",
-        }}
-        aria-label="About Andrew Kemler section"
-      >
-        <div className="mx-auto w-4/5">
-          <div className="hero-content min-h-full w-full flex flex-col justify-evenly px-2 sm:px-4">
-            <img
-              src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
-              alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
-              className="rounded-full object-cover h-[20vh] mb-4"
-              loading="lazy"
-            />
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center">
-              {about_title}
-            </h2>
-            <p className="text-xl mb-3 text-center">{about_text}</p>
-            <p className="text-xl text-center">{about_text_2}</p>
+      {isMobile ? (
+        <div
+          className="hero min-h-[100vh] bg-base-100"
+          style={{
+            scrollSnapAlign: "start",
+          }}
+          aria-label="About Andrew Kemler section"
+        >
+          <div className="mx-auto w-4/5">
+            <div className="hero-content min-h-full w-full flex flex-col justify-evenly px-2 sm:px-4">
+              <img
+                src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
+                alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
+                className="rounded-full object-cover h-[20vh] mb-4"
+                loading="lazy"
+              />
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center">
+                {about_title}
+              </h2>
+              <p className="text-xl mb-3 text-center">{about_text}</p>
+              <p className="text-xl text-center">{about_text_2}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className="hero min-h-[100vh] hidden md:inline"
-        ref={aboutRef}
-        style={{
-          background:
-            "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
-          scrollSnapAlign: "start",
-        }}
-        aria-label="About Andrew Kemler section"
-      >
-        <div className="hero-content min-h-full w-full">
-          <div className="card shadow-xl bg-base-100 border border-base-200">
-            <div className="card-body">
-              <div className="h-4/5 m-auto">
-                <div className="flex flex-row">
-                  <div className="w-1/2 flex items-center border-r border-gray-200">
-                    <img
-                      src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
-                      alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
-                      className="m-10 rounded-box m-auto"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh] pl-10">
-                    <div>
-                      <h2 className="text-3xl font-bold mb-4 indent-6">
-                        {about_title}
-                      </h2>
+      ) : (
+        <div
+          className="hero min-h-[100vh]"
+          style={{
+            background:
+              "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
+            scrollSnapAlign: "start",
+          }}
+          aria-label="About Andrew Kemler section"
+        >
+          <div className="hero-content min-h-full w-full">
+            <div className="card shadow-xl bg-base-100 border border-base-200">
+              <div className="card-body">
+                <div className="h-4/5 m-auto">
+                  <div className="flex flex-row">
+                    <div className="w-1/2 flex items-center border-r border-gray-200">
+                      <img
+                        src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
+                        alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
+                        className="m-10 rounded-box m-auto"
+                        loading="lazy"
+                      />
                     </div>
-                    <div>
-                      <p className="text-lg indent-6">{about_text}</p>
-                    </div>
-                    <div>
-                      <p className="text-lg">{about_text_2}</p>
+                    <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh] pl-10">
+                      <div>
+                        <h2 className="text-3xl font-bold mb-4 indent-6">
+                          {about_title}
+                        </h2>
+                      </div>
+                      <div>
+                        <p className="text-lg indent-6">{about_text}</p>
+                      </div>
+                      <div>
+                        <p className="text-lg">{about_text_2}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -279,7 +310,7 @@ const Layout = () => {
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div
         id="contact"
         ref={contactRef}
