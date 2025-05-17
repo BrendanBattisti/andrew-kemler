@@ -9,6 +9,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "gh-pages": "^6.3.0",
+    "gsap": "^3.13.0",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
     "react": "^19.1.0",
@@ -48,5 +49,5 @@
   "devDependencies": {
     "daisyui": "^5.0.35"
   },
-  "homepage": "https://andrew-kemler.onrender.com/" 
+  "homepage": "https://andrew-kemler.onrender.com/"
 }

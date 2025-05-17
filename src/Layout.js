@@ -1,9 +1,117 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitText from "gsap/src/SplitText";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
-
 const Layout = () => {
+  // Hero refs
+  const heroRef = useRef(null);
+  const heroSubtextRef = useRef(null);
+  const learnMoreRef = useRef(null);
+
+  // About refs
   const aboutRef = useRef(null);
+  const aboutRefMobile = useRef(null);
   const contactRef = useRef(null);
+  const aboutAnchorRef = useRef(null);
+
+  const isMobile = window.innerWidth < 768;
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+
+    let split;
+
+    if (heroRef.current && heroSubtextRef.current) {
+      // Properly initialize SplitText
+      split = new SplitText(heroSubtextRef.current, {
+        type: "words",
+      });
+
+      // Hero title fade-in
+      gsap.from(heroRef.current, {
+        delay: 0.5,
+        opacity: 0,
+        y: 50,
+        duration: 2,
+        ease: "power3.out",
+      });
+
+      // Animate each word
+      gsap.from(split.words, {
+        delay: 2.5,
+        y: -75,
+        opacity: 0,
+        duration: 0.8,
+        ease: "back.out(1.3)",
+        stagger: 0.15,
+      });
+
+      gsap.from(learnMoreRef.current, {
+        delay: 6,
+        opacity: 0,
+        y: 50,
+        duration: 2,
+        ease: "power3.out",
+      });
+    }
+    // Animate about section based on layout
+    const aboutTarget = isMobile ? aboutRefMobile.current : aboutRef.current;
+
+    //   if (aboutTarget) {
+    //     gsap.from(aboutTarget, {
+    //       scrollTrigger: {
+    //         trigger: aboutTarget,
+    //         start: "top 80%",
+    //       },
+    //       opacity: 0,
+    //       y: 50,
+    //       duration: 1,
+    //       ease: "power2.out",
+    //     });
+    //   }
+
+    //   // Animate contact section
+    //   if (contactRef.current) {
+    //     gsap.from(contactRef.current, {
+    //       scrollTrigger: {
+    //         trigger: contactRef.current,
+    //         start: "top 85%",
+    //       },
+    //       opacity: 0,
+    //       y: 50,
+    //       duration: 1,
+    //       ease: "power2.out",
+    //     });
+    //   }
+
+    //   // Animate fade-up elements
+    //   gsap.utils.toArray(".fade-up").forEach((el) => {
+    //     gsap.from(el, {
+    //       scrollTrigger: {
+    //         trigger: el,
+    //         start: "top 90%",
+    //       },
+    //       opacity: 0,
+    //       y: 30,
+    //       duration: 0.8,
+    //       ease: "power1.out",
+    //     });
+    //   });
+    // }, [isMobile]);
+
+    // gsap.utils.toArray(".fade-up").forEach((el) => {
+    //   gsap.from(el, {
+    //     scrollTrigger: {
+    //       trigger: el,
+    //       start: "top 90%",
+    //     },
+    //     opacity: 0,
+    //     y: 30,
+    //     duration: 0.8,
+    //     ease: "power1.out",
+    //   });
+  });
 
   // Content variables
   const title_text = "Secure Your Financial Future";
@@ -23,6 +131,8 @@ const Layout = () => {
   const contact_address =
     "209 HIGH POINT DRIVE STE 310, VICTOR, NEW YORK 14564";
 
+  // Add smth to scroll to about on isMobile
+
   return (
     <div
       style={{
@@ -33,7 +143,7 @@ const Layout = () => {
       }}
     >
       <div
-        className="navbar bg-base-100 shadow-md w-full"
+        className="navbar bg-base-100 shadow-md w-full md:"
         style={{
           transition: "opacity 0.2s, transform 0.2s",
           background:
@@ -63,7 +173,7 @@ const Layout = () => {
             <li className="mx-2">
               <button
                 onClick={() =>
-                  aboutRef.current.scrollIntoView({ behavior: "smooth" })
+                  aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
                 }
                 className="btn btn-ghost"
                 aria-label="Scroll to About section"
@@ -105,15 +215,26 @@ const Layout = () => {
           ></div>
           <div className="hero-content text-center">
             <div className="max-w-xl mx-auto">
-              <h1 className="mb-5 text-5xl font-bold text-gray-100">
-                {title_text}
-              </h1>
-              <p className="mb-5 text-lg text-gray-300">{title_description}</p>
+              <div ref={heroRef}>
+                <h1
+                  className="text-5xl font-bold text-white"
+                  style={{ whiteSpace: "nowrap", marginBottom: "2rem" }}
+                >
+                  {title_text}
+                </h1>
+              </div>
+              <div ref={heroSubtextRef}>
+                <p className="mb-8 text-lg text-gray-300 fade-up">
+                  {title_description}
+                </p>
+              </div>
               <button
+                ref={learnMoreRef}
                 onClick={() =>
-                  aboutRef.current.scrollIntoView({ behavior: "smooth" })
+                  aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
                 }
                 className="btn btn-primary"
+                style={{ marginTop: "2rem" }}
               >
                 {button_text}
               </button>
@@ -121,9 +242,10 @@ const Layout = () => {
           </div>
         </h2>
       </div>
+      <div ref={aboutAnchorRef} style={{ height: 0 }}></div>
       <div
         className="hero min-h-[100vh] md:hidden bg-base-100"
-        ref={aboutRef}
+        ref={aboutRefMobile}
         style={{
           scrollSnapAlign: "start",
         }}
