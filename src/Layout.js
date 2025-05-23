@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/src/SplitText";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import Content from "./Content.json";
 
 const Layout = () => {
   //Navbar ref
@@ -97,23 +98,6 @@ const Layout = () => {
 
     // No need for aboutTarget anymore
   }, []);
-  // Content variables
-  const title_text = "Secure Your Financial Future";
-  const title_description =
-    "Empowering you with the knowledge and tools to achieve lasting financial security and peace of mind.";
-  const button_text = "Learn More";
-
-  const about_title = "Meet Andrew Kemler";
-  const about_text =
-    "Hi, I'm Andrew, a financial advisor with New York Life, proudly serving the Rochester community. Helping individuals and families build secure financial futures isn't just my profession — it's something I truly care about. I bring a personal, thoughtful approach to every client relationship, always aiming to provide guidance with integrity and clarity.";
-  const about_text_2 =
-    "When I'm not working with clients, I'm usually spending time with my fiancée, Kaylie, and our energetic corgi, Forest. Whether I'm at the office or at home, I try to bring the same sense of purpose and positivity to everything I do.";
-
-  const contact_title = "Let's get started.";
-  const contact_phone = "585-690-9288";
-  const contact_email = "abkemler@ft.newyorklife.com";
-  const contact_address =
-    "209 HIGH POINT DRIVE STE 310, VICTOR, NEW YORK 14564";
 
   // Add smth to scroll to about on isMobile
 
@@ -223,11 +207,13 @@ const Layout = () => {
                   className="text-5xl font-bold text-white w-full"
                   style={{ marginBottom: "2rem" }}
                 >
-                  {title_text}
+                  {Content.title_text}
                 </h1>
               </div>
               <div ref={heroSubtextRef}>
-                <p className="text-lg text-gray-300">{title_description}</p>
+                <p className="text-lg text-gray-300">
+                  {Content.title_description}
+                </p>
               </div>
               <button
                 ref={learnMoreRef}
@@ -237,7 +223,7 @@ const Layout = () => {
                 className="btn btn-primary"
                 style={{ marginTop: "2rem" }}
               >
-                {button_text}
+                {Content.button_text}
               </button>
             </div>
           </div>
@@ -261,10 +247,10 @@ const Layout = () => {
                 loading="lazy"
               />
               <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center">
-                {about_title}
+                {Content.about_title}
               </h2>
-              <p className="text-xl mb-3 text-center">{about_text}</p>
-              <p className="text-xl text-center">{about_text_2}</p>
+              <p className="text-xl mb-3 text-center">{Content.about_text}</p>
+              <p className="text-xl text-center">{Content.about_text_2}</p>
             </div>
           </div>
         </div>
@@ -294,14 +280,14 @@ const Layout = () => {
                     <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh] pl-10">
                       <div>
                         <h2 className="text-3xl font-bold mb-4 indent-6">
-                          {about_title}
+                          {Content.about_title}
                         </h2>
                       </div>
                       <div>
-                        <p className="text-lg indent-6">{about_text}</p>
+                        <p className="text-lg indent-6">{Content.about_text}</p>
                       </div>
                       <div>
-                        <p className="text-lg">{about_text_2}</p>
+                        <p className="text-lg">{Content.about_text_2}</p>
                       </div>
                     </div>
                   </div>
@@ -332,7 +318,7 @@ const Layout = () => {
           >
             <div className="card-body">
               <h1 className="card-title text-3xl font-bold text-base-content mb-4">
-                {contact_title}
+                {Content.contact_title}
               </h1>
               <div className="flex flex-col">
                 <div className="flex flex-row items-center mb-2">
@@ -347,7 +333,7 @@ const Layout = () => {
                       className="text-primary hover:underline"
                       aria-label="View office location on Google Maps"
                     >
-                      {contact_address.split(",")[0]}
+                      {Content.contact_address.split(",")[0]}
                       <br />
                       NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
                     </a>
@@ -359,11 +345,14 @@ const Layout = () => {
                   </div>
                   <div>
                     <a
-                      href={`tel:${contact_phone.replace(/[^\d]/g, "")}`}
+                      href={`tel:${Content.contact_phone.replace(
+                        /[^\d]/g,
+                        ""
+                      )}`}
                       className="text-primary hover:underline"
-                      aria-label={`Call ${contact_phone}`}
+                      aria-label={`Call ${Content.contact_phone}`}
                     >
-                      {contact_phone}
+                      {Content.contact_phone}
                     </a>
                   </div>
                 </div>
@@ -373,11 +362,11 @@ const Layout = () => {
                   </div>
                   <div>
                     <a
-                      href={`mailto:${contact_email}`}
+                      href={`mailto:${Content.contact_email}`}
                       className="text-primary hover:underline"
-                      aria-label={`Send email to ${contact_email}`}
+                      aria-label={`Send email to ${Content.contact_email}`}
                     >
-                      {contact_email}
+                      {Content.contact_email}
                     </a>
                   </div>
                 </div>
