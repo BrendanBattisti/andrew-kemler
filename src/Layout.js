@@ -150,12 +150,12 @@ const Layout = () => {
             className="mr-4"
             aria-label="New York Life - Andrew Kemler"
           >
-            {/* <img
-              src={process.env.PUBLIC_URL + "/imgs/nyl-logo-1.svg"}
-              alt="New York Life Logo"
+            <img
+              src={process.env.PUBLIC_URL + "/imgs/nyl-logo.svg"}
+              alt="NYL Logo"
               className="h-8 w-8 mr-2"
               style={{ borderRadius: "4px" }}
-            /> */}
+            />
           </a>
           <AnimatePresence mode="wait">
             {!isMobile && (
