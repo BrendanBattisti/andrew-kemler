@@ -5,12 +5,13 @@ import SplitText from "gsap/src/SplitText";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Content from "./Content.json";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 const Layout = () => {
   //Navbar ref
   const navbarRef = useRef(null);
-  const [navbarPosition, setNavbarPosition] = useState("absolute");
-  const [navbarHidden, setNavbarHidden] = useState(true);
 
   // Hero refs
   const heroRef = useRef(null);
@@ -18,9 +19,15 @@ const Layout = () => {
   const learnMoreRef = useRef(null);
 
   // About refs
-
   const contactRef = useRef(null);
   const aboutAnchorRef = useRef(null);
+
+  // Navbar name ref
+  const navbarNameRef = useRef(null);
+
+  // Button refs
+  const aboutBtnRef = useRef(null);
+  const getStartedBtnRef = useRef(null);
 
   // Responsive state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -44,60 +51,82 @@ const Layout = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
-    let split;
+    let titleSplit;
+    let navbarSplit;
 
-    if (
-      heroRef.current &&
-      heroSubtextRef.current &&
-      learnMoreRef.current &&
-      navbarRef.current
-    ) {
-      split = new SplitText(heroSubtextRef.current, {
-        type: "words",
+    if (heroRef.current && heroSubtextRef.current && learnMoreRef.current) {
+      titleSplit = new SplitText(heroRef.current, {
+        type: "chars",
       });
 
-      // Remove the hidden class just before animation starts
-      setNavbarHidden(false);
+      navbarSplit = new SplitText(navbarNameRef.current, { type: "chars" });
 
-      gsap.set(navbarRef.current, { y: -50, opacity: 0 });
+      // Hide all characters and buttons initially
+      gsap.set(titleSplit.chars, { opacity: 0 });
+      gsap.set(navbarSplit.chars, { opacity: 0 });
+      gsap.set([aboutBtnRef.current, getStartedBtnRef.current], {
+        opacity: 0,
+        y: 20,
+      });
 
       const tl = gsap.timeline();
 
-      tl.from(heroRef.current, {
-        delay: 0.5,
-        opacity: 0,
-        y: 50,
-        duration: 2,
-        ease: "power3.out",
-      })
-        .from(
-          split.words,
-          {
-            y: -75,
-            opacity: 0,
-            duration: 0.8,
-            ease: "back.out(1.3)",
-            stagger: 0.15,
-          },
-          "-=0.5"
-        )
-        .from(learnMoreRef.current, {
-          opacity: 0,
-          y: 50,
-          duration: 2,
-          ease: "power3.out",
-        })
-        .to(navbarRef.current, {
-          y: 0,
+      tl.to(
+        titleSplit.chars,
+        {
           opacity: 1,
-          duration: 1,
-          ease: "power3.out",
-          onComplete: () => setNavbarPosition("fixed"),
-        });
+          duration: 0.05,
+          ease: "none",
+          stagger: 0.04,
+          delay: 1,
+        },
+        "-=0.5"
+      )
+        .from(
+          learnMoreRef.current,
+          {
+            opacity: 0,
+            y: 50,
+            duration: 2,
+            ease: "power3.out",
+          },
+          "+=0.3"
+        )
+        .to(navbarSplit.chars, {
+          opacity: 1,
+          duration: 0.05,
+          ease: "none",
+          stagger: 0.05,
+        })
+        .to(
+          aboutBtnRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "+=0.1"
+        )
+        .to(
+          getStartedBtnRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "-=0.2"
+        );
     }
 
-    // No need for aboutTarget anymore
-  }, []);
+    // Cleanup
+    return () => {
+      if (titleSplit) titleSplit.revert();
+      if (navbarSplit) navbarSplit.revert();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [isMobile]);
 
   // Add smth to scroll to about on isMobile
 
@@ -111,22 +140,18 @@ const Layout = () => {
       }}
     >
       <div
-        className={`navbar bg-base-100 shadow-md w-full transition-opacity transition-transform duration-200
-          ${navbarHidden ? "opacity-0 -translate-y-12" : ""}
-        `}
+        className="navbar w-full"
         ref={navbarRef}
         style={{
-          position: navbarPosition,
+          position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           zIndex: 50,
-          background:
-            "linear-gradient(30deg, #f8fafc 0%,rgb(214, 221, 230) 100%)",
           scrollSnapAlign: "start",
         }}
       >
-        <div className="flex-1 flex items-center text-2xl font-bold">
+        <div className="flex-1 flex items-center text-2xl font-bold text-white">
           <a
             href="https://www.newyorklife.com/agent/abkemler"
             target="_blank"
@@ -134,35 +159,34 @@ const Layout = () => {
             className="mr-4"
             aria-label="New York Life - Andrew Kemler"
           >
-            <img
+            {/* <img
               src={process.env.PUBLIC_URL + "/imgs/nyl-logo.svg"}
               alt="NYL Logo"
               className="h-8 w-8 mr-2"
               style={{ borderRadius: "4px" }}
-            />
+            /> */}
           </a>
-          <AnimatePresence mode="wait">
-            {!isMobile && (
-              <motion.span
-                className="hidden md:inline"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                Andrew Kemler
-              </motion.span>
-            )}
-          </AnimatePresence>
+          {!isMobile && (
+            <div
+              ref={navbarNameRef}
+              className="hidden md:inline text-white fancy_underline"
+              initial={false}
+              animate={false}
+              exit={false}
+            >
+              Andrew Kemler
+            </div>
+          )}
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li className="mx-2">
               <button
+                ref={aboutBtnRef}
                 onClick={() =>
                   aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
                 }
-                className="btn btn-ghost"
+                className="btn btn-ghost text-white hover:text-white hover:bg-white/10"
                 aria-label="Scroll to About section"
               >
                 About
@@ -170,6 +194,7 @@ const Layout = () => {
             </li>
             <li className="mx-2 mr-4">
               <button
+                ref={getStartedBtnRef}
                 onClick={() =>
                   contactRef.current.scrollIntoView({ behavior: "smooth" })
                 }
@@ -198,20 +223,23 @@ const Layout = () => {
         >
           <div
             className="hero-overlay"
-            style={{ backgroundColor: "rgba(30,41,59,0.7)" }}
+            style={{ backgroundColor: "rgba(30,41,59,0.3)" }}
           ></div>
-          <div className="hero-content text-center w-4/5">
+          <div
+            className="hero-content text-center w-4/5"
+            style={{ marginTop: "-37vh" }}
+          >
             <div className="w-full">
               <div ref={heroRef}>
                 <h1
-                  className="text-5xl font-bold text-white w-full"
+                  className="text-3xl md:text-5xl font-bold text-white w-full text-shadow-lg"
                   style={{ marginBottom: "2rem" }}
                 >
                   {Content.title_text}
                 </h1>
               </div>
               <div ref={heroSubtextRef}>
-                <p className="text-lg text-gray-300">
+                <p className="text-lg text-white text-shadow-lg">
                   {Content.title_description}
                 </p>
               </div>
@@ -249,8 +277,13 @@ const Layout = () => {
               <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center">
                 {Content.about_title}
               </h2>
-              <p className="text-xl mb-3 text-center">{Content.about_text}</p>
-              <p className="text-xl text-center">{Content.about_text_2}</p>
+              <p className="text-xl mb-4 text-center">{Content.about_text}</p>
+              <p className="text-xl mb-4 text-center">{Content.about_text_2}</p>
+              {Content.about_text_3 && (
+                <p className="text-xl mb-4 text-center">
+                  {Content.about_text_3}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -277,17 +310,16 @@ const Layout = () => {
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2 text-base-content mb-4 justify-evenly h-full min-h-[70vh] pl-10">
-                      <div>
-                        <h2 className="text-3xl font-bold mb-4 indent-6">
-                          {Content.about_title}
-                        </h2>
-                      </div>
-                      <div>
-                        <p className="text-lg indent-6">{Content.about_text}</p>
-                      </div>
-                      <div>
-                        <p className="text-lg">{Content.about_text_2}</p>
+                    <div className="flex flex-col w-1/2 text-base-content mb-4 h-full min-h-[70vh] pl-10 justify-center">
+                      <h2 className="text-3xl font-bold indent-6 mb-4">
+                        {Content.about_title}
+                      </h2>
+                      <div className="flex flex-col justify-evenly h-4/5">
+                        <p className="text-lg indent-6 mb-4">
+                          {Content.about_text}
+                        </p>
+                        <p className="text-lg mb-4">{Content.about_text_2}</p>
+                        <p className="text-lg mb-4">{Content.about_text_3}</p>
                       </div>
                     </div>
                   </div>
@@ -297,6 +329,151 @@ const Layout = () => {
           </div>
         </div>
       )}
+      {/* Products Section */}
+      <div
+        id="products"
+        aria-label="Products section"
+        style={{
+          scrollSnapAlign: "start",
+        }}
+      >
+        <div
+          className="flex flex-col items-center justify-center min-h-[60vh] p-8"
+          style={{
+            background: "linear-gradient(90deg, #f8fafc 0%, #e2e8f0 100%)",
+          }}
+        >
+          <div className="w-full max-w-4xl">
+            <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
+              How I Can Help
+            </h2>
+            <div className="overflow-hidden border border-base-200 bg-base-100">
+              {/* Support Area 1: Budgeting */}
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 first:rounded-t-lg">
+                <div>
+                  <h3 className="card-title text-xl font-semibold mb-2">
+                    Personalized Budgeting Guidance
+                  </h3>
+                  <p className="text-base-content">
+                    Understanding where your money goes is the first step toward{" "}
+                    <b>financial wellness</b>. Together, we'll create a strategy
+                    that supports your lifestyle — now and in the future.
+                  </p>
+                </div>
+                <div className="flex justify-center">
+                  <img
+                    src={process.env.PUBLIC_URL + "/imgs/budgeting.webp"}
+                    alt="Budgeting illustration"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+              {/* Support Area 2: Retirement Planning */}
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 md:[&>*:first-child]:order-2">
+                <div>
+                  <h3 className="card-title text-xl font-semibold mb-2">
+                    Retirement Planning for Your Future
+                  </h3>
+                  <p className="text-base-content">
+                    A fulfilling retirement doesn't happen by accident. Let's
+                    put a plan in place today that gives you the <b>freedom</b>{" "}
+                    and <b>peace of mind</b> you deserve later.
+                  </p>
+                </div>
+                <div className="flex justify-center">
+                  <img
+                    src={process.env.PUBLIC_URL + "/imgs/retirement.webp"}
+                    alt="Retirement planning illustration"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+              {/* Support Area 3: Life Insurance */}
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 last:rounded-b-lg">
+                <div>
+                  <h3 className="card-title text-xl font-semibold mb-2">
+                    Protecting What Matters Most
+                  </h3>
+                  <p className="text-base-content">
+                    Protect your loved ones while <b>growing your wealth</b>. A
+                    custom whole life policy from New York Life helps you invest{" "}
+                    <b>confidently</b> without sacrificing <b>security</b>.
+                  </p>
+                  <a
+                    href="https://www.newyorklife.com/products/life-insurance"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button className="btn btn-primary mt-4">Learn More</button>
+                  </a>
+                </div>
+                <div className="flex justify-center">
+                  <img
+                    src={process.env.PUBLIC_URL + "/imgs/life-insurance.webp"}
+                    alt="Life insurance illustration"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Testimonial Section */}
+      <div
+        id="testimonials"
+        aria-label="Testimonials section"
+        style={{
+          scrollSnapAlign: "start",
+        }}
+      >
+        <div
+          className="flex flex-col items-center justify-center min-h-[40vh] p-8"
+          style={{
+            background: "linear-gradient(90deg, #e2e8f0 0%, #f8fafc 100%)",
+          }}
+        >
+          <div className="w-full max-w-4xl">
+            <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
+              What Clients Say
+            </h2>
+            <Slider
+              dots={false}
+              infinite={true}
+              speed={500}
+              slidesToShow={3}
+              slidesToScroll={1}
+              autoplay={true}
+              autoplaySpeed={3500}
+              responsive={[
+                {
+                  breakpoint: 1024,
+                  settings: { slidesToShow: 2 },
+                },
+                {
+                  breakpoint: 640,
+                  settings: { slidesToShow: 1 },
+                },
+              ]}
+            >
+              {Content.testimonials &&
+                Content.testimonials.map((testimonial, idx) => (
+                  <div className="px-2" key={idx}>
+                    <div className="bg-base-100 border border-base-200 rounded-lg shadow p-4 h-full flex flex-col justify-between">
+                      <p className="text-base italic mb-2">
+                        "{testimonial.text}"
+                      </p>
+                      <div className="text-right font-semibold text-sm">
+                        – {testimonial.author}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </Slider>
+          </div>
+        </div>
+      </div>
+      {/* Contact Section */}
       <div
         id="contact"
         ref={contactRef}
@@ -390,12 +567,10 @@ const Layout = () => {
         }}
       >
         <span>
-          While Andrew Kemler is affiliated with New York Life, this website was
-          independently commissioned and is not an official New York Life
-          website.
+          Andrew Kemler is a financial advisor under New York Life, and this
+          website was independently commissioned and approved by New York Life
           <br />
-          All products, trademarks, and branding referenced are the property of
-          New York Life Insurance Company.
+          Website Designed by Brendan Battisti
         </span>
       </footer>
     </div>
