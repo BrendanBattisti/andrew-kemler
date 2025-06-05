@@ -603,17 +603,6 @@ const Layout = () => {
           website was independently commissioned and approved by New York Life
           <br />
           Website Designed by Brendan Battisti
-          <br />
-          <a
-            href="#products"
-            onClick={(e) => {
-              e.preventDefault();
-              productsRef.current.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="text-primary hover:underline ml-2"
-          >
-            How I Can Help
-          </a>
         </span>
       </footer>
     </div>
