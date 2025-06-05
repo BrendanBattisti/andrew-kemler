@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/src/SplitText";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
 import Content from "./Content.json";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -27,7 +26,11 @@ const Layout = () => {
 
   // Button refs
   const aboutBtnRef = useRef(null);
+  const howICanHelpBtnRef = useRef(null);
   const getStartedBtnRef = useRef(null);
+
+  // Products ref
+  const productsRef = useRef(null);
 
   // Responsive state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -64,10 +67,17 @@ const Layout = () => {
       // Hide all characters and buttons initially
       gsap.set(titleSplit.chars, { opacity: 0 });
       gsap.set(navbarSplit.chars, { opacity: 0 });
-      gsap.set([aboutBtnRef.current, getStartedBtnRef.current], {
-        opacity: 0,
-        y: 20,
-      });
+      gsap.set(
+        [
+          aboutBtnRef.current,
+          howICanHelpBtnRef.current,
+          getStartedBtnRef.current,
+        ],
+        {
+          opacity: 0,
+          y: 20,
+        }
+      );
 
       const tl = gsap.timeline();
 
@@ -107,6 +117,16 @@ const Layout = () => {
             ease: "power2.out",
           },
           "+=0.1"
+        )
+        .to(
+          howICanHelpBtnRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "-=0.2"
         )
         .to(
           getStartedBtnRef.current,
@@ -190,6 +210,18 @@ const Layout = () => {
                 aria-label="Scroll to About section"
               >
                 About
+              </button>
+            </li>
+            <li className="mx-2">
+              <button
+                ref={howICanHelpBtnRef}
+                onClick={() =>
+                  productsRef.current.scrollIntoView({ behavior: "smooth" })
+                }
+                className="btn btn-ghost text-white hover:text-white hover:bg-white/10"
+                aria-label="Scroll to How I Can Help section"
+              >
+                How I Can Help
               </button>
             </li>
             <li className="mx-2 mr-4">
@@ -332,35 +364,41 @@ const Layout = () => {
       {/* Products Section */}
       <div
         id="products"
+        ref={productsRef}
         aria-label="Products section"
         style={{
           scrollSnapAlign: "start",
         }}
       >
         <div
-          className="flex flex-col items-center justify-center min-h-[60vh] p-8"
-          style={{
-            background: "linear-gradient(90deg, #f8fafc 0%, #e2e8f0 100%)",
-          }}
+          className="
+            w-full
+            md:flex md:flex-col md:items-center md:justify-center md:min-h-[60vh] 
+            md:p-8
+            md:bg-[linear-gradient(90deg,_#f8fafc_0%,_#e2e8f0_100%)]
+            p-0
+            bg-none
+          "
         >
-          <div className="w-full max-w-4xl">
+          <div className="w-full md:max-w-4xl md:m-auto">
             <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
               How I Can Help
             </h2>
-            <div className="overflow-hidden border border-base-200 bg-base-100">
+            <div className=" border border-base-200 bg-base-100">
               {/* Support Area 1: Budgeting */}
               <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 first:rounded-t-lg">
-                <div>
-                  <h3 className="card-title text-xl font-semibold mb-2">
+                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-4">
+                  <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Personalized Budgeting Guidance
                   </h3>
-                  <p className="text-base-content">
+                  <p className="text-base md:text-lg text-base-content">
                     Understanding where your money goes is the first step toward{" "}
                     <b>financial wellness</b>. Together, we'll create a strategy
                     that supports your lifestyle — now and in the future.
                   </p>
+                  <div></div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/budgeting.webp"}
                     alt="Budgeting illustration"
@@ -370,17 +408,18 @@ const Layout = () => {
               </div>
               {/* Support Area 2: Retirement Planning */}
               <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 md:[&>*:first-child]:order-2">
-                <div>
-                  <h3 className="card-title text-xl font-semibold mb-2">
+                <div className="order-2 md:order-2 h-full flex flex-col justify-between p-4">
+                  <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Retirement Planning for Your Future
                   </h3>
-                  <p className="text-base-content">
+                  <p className="text-base md:text-lg text-base-content">
                     A fulfilling retirement doesn't happen by accident. Let's
                     put a plan in place today that gives you the <b>freedom</b>{" "}
                     and <b>peace of mind</b> you deserve later.
                   </p>
+                  <div></div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center order-1 md:order-1 mb-4 md:mb-0">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/retirement.webp"}
                     alt="Retirement planning illustration"
@@ -390,24 +429,28 @@ const Layout = () => {
               </div>
               {/* Support Area 3: Life Insurance */}
               <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 last:rounded-b-lg">
-                <div>
-                  <h3 className="card-title text-xl font-semibold mb-2">
+                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-4">
+                  <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Protecting What Matters Most
                   </h3>
-                  <p className="text-base-content">
+                  <p className="text-base md:text-lg text-base-content">
                     Protect your loved ones while <b>growing your wealth</b>. A
                     custom whole life policy from New York Life helps you invest{" "}
                     <b>confidently</b> without sacrificing <b>security</b>.
                   </p>
-                  <a
-                    href="https://www.newyorklife.com/products/life-insurance"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <button className="btn btn-primary mt-4">Learn More</button>
-                  </a>
+                  <div className="flex justify-end">
+                    <a
+                      href="https://www.newyorklife.com/products/life-insurance"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <button className="btn btn-primary mt-4">
+                        Learn More
+                      </button>
+                    </a>
+                  </div>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/life-insurance.webp"}
                     alt="Life insurance illustration"
@@ -419,75 +462,64 @@ const Layout = () => {
           </div>
         </div>
       </div>
-      {/* Testimonial Section */}
+      {/* Testimonial & Contact Section (shared background) */}
       <div
-        id="testimonials"
-        aria-label="Testimonials section"
         style={{
           scrollSnapAlign: "start",
+          background:
+            "linear-gradient(30deg, #f8fafc 0%, rgb(162, 168, 176) 100%)",
         }}
+        className="flex flex-col items-center justify-center p-8"
       >
+        {/* Testimonials */}
         <div
-          className="flex flex-col items-center justify-center min-h-[40vh] p-8"
-          style={{
-            background: "linear-gradient(90deg, #e2e8f0 0%, #f8fafc 100%)",
-          }}
+          id="testimonials"
+          aria-label="Testimonials section"
+          className="w-full max-w-4xl mb-16"
         >
-          <div className="w-full max-w-4xl">
-            <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
-              What Clients Say
-            </h2>
-            <Slider
-              dots={false}
-              infinite={true}
-              speed={500}
-              slidesToShow={3}
-              slidesToScroll={1}
-              autoplay={true}
-              autoplaySpeed={3500}
-              responsive={[
-                {
-                  breakpoint: 1024,
-                  settings: { slidesToShow: 2 },
-                },
-                {
-                  breakpoint: 640,
-                  settings: { slidesToShow: 1 },
-                },
-              ]}
-            >
-              {Content.testimonials &&
-                Content.testimonials.map((testimonial, idx) => (
-                  <div className="px-2" key={idx}>
-                    <div className="bg-base-100 border border-base-200 rounded-lg shadow p-4 h-full flex flex-col justify-between">
-                      <p className="text-base italic mb-2">
-                        "{testimonial.text}"
-                      </p>
-                      <div className="text-right font-semibold text-sm">
-                        – {testimonial.author}
-                      </div>
+          <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
+            What Clients Say
+          </h2>
+          <Slider
+            dots={false}
+            infinite={true}
+            speed={500}
+            slidesToShow={3}
+            slidesToScroll={1}
+            autoplay={true}
+            autoplaySpeed={3500}
+            responsive={[
+              {
+                breakpoint: 1024,
+                settings: { slidesToShow: 2 },
+              },
+              {
+                breakpoint: 640,
+                settings: { slidesToShow: 1 },
+              },
+            ]}
+          >
+            {Content.testimonials &&
+              Content.testimonials.map((testimonial, idx) => (
+                <div className="px-2" key={idx}>
+                  <div className="bg-base-100 border border-base-200 rounded-lg shadow p-4 h-full flex flex-col justify-between">
+                    <p className="text-base italic mb-2">
+                      "{testimonial.text}"
+                    </p>
+                    <div className="text-right font-semibold text-sm">
+                      – {testimonial.author}
                     </div>
                   </div>
-                ))}
-            </Slider>
-          </div>
+                </div>
+              ))}
+          </Slider>
         </div>
-      </div>
-      {/* Contact Section */}
-      <div
-        id="contact"
-        ref={contactRef}
-        aria-label="Contact section"
-        style={{
-          scrollSnapAlign: "start",
-        }}
-      >
+        {/* Contact */}
         <div
-          className="flex flex-col items-center justify-center min-h-[100vh] p-8"
-          style={{
-            background:
-              "linear-gradient(30deg, #f8fafc 0%, rgb(162, 168, 176) 100%)",
-          }}
+          id="contact"
+          ref={contactRef}
+          aria-label="Contact section"
+          className="flex flex-col items-center justify-center min-h-[100vh] w-full"
         >
           <div
             className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200"
@@ -571,6 +603,17 @@ const Layout = () => {
           website was independently commissioned and approved by New York Life
           <br />
           Website Designed by Brendan Battisti
+          <br />
+          <a
+            href="#products"
+            onClick={(e) => {
+              e.preventDefault();
+              productsRef.current.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="text-primary hover:underline ml-2"
+          >
+            How I Can Help
+          </a>
         </span>
       </footer>
     </div>
