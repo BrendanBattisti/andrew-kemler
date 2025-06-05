@@ -35,6 +35,11 @@ const Layout = () => {
   // Responsive state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  // New state for navbar background
+  const [navbarWhite, setNavbarWhite] = useState(false);
+
+  const scrollContainerRef = useRef(null);
+
   useEffect(() => {
     // Responsive handler
     const handleResize = () => {
@@ -148,10 +153,34 @@ const Layout = () => {
     };
   }, [isMobile]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current || !navbarRef.current || !scrollContainerRef.current)
+        return;
+      const heroBottom =
+        heroRef.current.getBoundingClientRect().bottom -
+        scrollContainerRef.current.getBoundingClientRect().top;
+      setNavbarWhite(heroBottom <= 0);
+    };
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
+
   // Add smth to scroll to about on isMobile
 
   return (
     <div
+      ref={scrollContainerRef}
       style={{
         scrollSnapType: "y proximity",
         overflowY: "auto",
@@ -160,7 +189,9 @@ const Layout = () => {
       }}
     >
       <div
-        className="navbar w-full"
+        className={`navbar w-full transition-colors duration-300 ${
+          navbarWhite ? "bg-white shadow text-base-content" : ""
+        }`}
         ref={navbarRef}
         style={{
           position: "absolute",
@@ -171,7 +202,11 @@ const Layout = () => {
           scrollSnapAlign: "start",
         }}
       >
-        <div className="flex-1 flex items-center text-2xl font-bold text-white">
+        <div
+          className={`flex-1 flex items-center text-2xl font-bold ${
+            navbarWhite ? "text-black" : "text-white"
+          }`}
+        >
           <a
             href="https://www.newyorklife.com/agent/abkemler"
             target="_blank"
@@ -189,7 +224,9 @@ const Layout = () => {
           {!isMobile && (
             <div
               ref={navbarNameRef}
-              className="hidden md:inline text-white fancy_underline"
+              className={`hidden md:inline fancy_underline ${
+                navbarWhite ? "text-black" : "text-white"
+              }`}
               initial={false}
               animate={false}
               exit={false}
@@ -206,7 +243,11 @@ const Layout = () => {
                 onClick={() =>
                   aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
                 }
-                className="btn btn-ghost text-white hover:text-white hover:bg-white/10"
+                className={`btn btn-ghost hover:bg-white/10 ${
+                  navbarWhite
+                    ? "text-black hover:text-black"
+                    : "text-white hover:text-white"
+                }`}
                 aria-label="Scroll to About section"
               >
                 About
@@ -218,7 +259,11 @@ const Layout = () => {
                 onClick={() =>
                   productsRef.current.scrollIntoView({ behavior: "smooth" })
                 }
-                className="btn btn-ghost text-white hover:text-white hover:bg-white/10"
+                className={`btn btn-ghost hover:bg-white/10 ${
+                  navbarWhite
+                    ? "text-black hover:text-black"
+                    : "text-white hover:text-white"
+                }`}
                 aria-label="Scroll to How I Can Help section"
               >
                 How I Can Help
@@ -302,7 +347,7 @@ const Layout = () => {
             <div className="hero-content min-h-full w-full flex flex-col justify-evenly px-2 sm:px-4">
               <img
                 src={process.env.PUBLIC_URL + "/imgs/andrew.webp"}
-                alt="Andrew Kemler, Financial Advisor at New York Life, with his dog Forest"
+                alt="Andrew Kemler, Financial Advisor at New York Life, with his corgi, Forrest"
                 className="rounded-full object-cover h-[20vh] mb-4"
                 loading="lazy"
               />
@@ -403,6 +448,7 @@ const Layout = () => {
                     src={process.env.PUBLIC_URL + "/imgs/budgeting.webp"}
                     alt="Budgeting illustration"
                     className="object-contain"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -424,6 +470,7 @@ const Layout = () => {
                     src={process.env.PUBLIC_URL + "/imgs/retirement.webp"}
                     alt="Retirement planning illustration"
                     className="object-contain"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -455,6 +502,7 @@ const Layout = () => {
                     src={process.env.PUBLIC_URL + "/imgs/life-insurance.webp"}
                     alt="Life insurance illustration"
                     className="object-contain"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -478,7 +526,7 @@ const Layout = () => {
           className="w-full max-w-4xl mb-16"
         >
           <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
-            What Clients Say
+            What My Clients Say
           </h2>
           <Slider
             dots={false}
@@ -526,7 +574,7 @@ const Layout = () => {
             aria-label="Contact information card"
           >
             <div className="card-body">
-              <h1 className="card-title text-3xl font-bold text-base-content mb-4">
+              <h1 className="card-title text-xl font-bold text-base-content mb-4">
                 {Content.contact_title}
               </h1>
               <div className="flex flex-col">
@@ -599,8 +647,9 @@ const Layout = () => {
         }}
       >
         <span>
-          Andrew Kemler is a financial advisor under New York Life, and this
-          website was independently commissioned and approved by New York Life
+          This website was independently commissioned and approved by New York
+          Life. Andrew Kemler is a financial advisor with New York Life
+          Insurance Company
           <br />
           Website Designed by Brendan Battisti
         </span>
