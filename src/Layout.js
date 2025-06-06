@@ -366,7 +366,7 @@ const Layout = () => {
         </div>
       ) : (
         <div
-          className="hero min-h-[100vh]"
+          className="hero"
           style={{
             background:
               "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
@@ -374,7 +374,7 @@ const Layout = () => {
           }}
           aria-label="About Andrew Kemler section"
         >
-          <div className="hero-content min-h-full w-full">
+          <div className="hero-content min-h-full w-4/5">
             <div className="card shadow-xl bg-base-100 border border-base-200">
               <div className="card-body">
                 <div className="h-4/5 m-auto">
@@ -387,7 +387,7 @@ const Layout = () => {
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2 text-base-content mb-4 h-full min-h-[70vh] pl-10 justify-center">
+                    <div className="flex flex-col w-1/2 text-base-content mb-4 h-full pl-10 justify-center">
                       <h2 className="text-3xl font-bold indent-6 mb-4">
                         {Content.about_title}
                       </h2>
