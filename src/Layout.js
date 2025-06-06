@@ -374,7 +374,7 @@ const Layout = () => {
           }}
           aria-label="About Andrew Kemler section"
         >
-          <div className="hero-content min-h-full w-4/5">
+          <div className="hero-content min-h-full w-4/5 my-10">
             <div className="card shadow-xl bg-base-100 border border-base-200">
               <div className="card-body">
                 <div className="h-4/5 m-auto">
