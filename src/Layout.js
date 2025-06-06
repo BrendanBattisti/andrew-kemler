@@ -417,22 +417,23 @@ const Layout = () => {
       >
         <div
           className="
-            w-full
+            sm:w-full
             md:flex md:flex-col md:items-center md:justify-center md:min-h-[60vh] 
             md:p-8
             md:bg-[linear-gradient(90deg,_#f8fafc_0%,_#e2e8f0_100%)]
             p-0
             bg-none
+            
           "
         >
-          <div className="w-full md:max-w-4xl md:m-auto">
+          <div className="sm:w-full md:w-4/5 md:m-auto">
             <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
               How I Can Help
             </h2>
             <div className=" border border-base-200 bg-base-100">
               {/* Support Area 1: Budgeting */}
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 first:rounded-t-lg">
-                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center border-b border-base-200 first:rounded-t-lg">
+                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-8">
                   <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Personalized Budgeting Guidance
                   </h3>
@@ -443,18 +444,18 @@ const Layout = () => {
                   </p>
                   <div></div>
                 </div>
-                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0">
+                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0 h-[40vh] md:h-auto">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/budgeting.webp"}
                     alt="Budgeting illustration"
-                    className="object-contain"
+                    className="object-cover md:object-contain h-full w-full"
                     loading="lazy"
                   />
                 </div>
               </div>
               {/* Support Area 2: Retirement Planning */}
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 md:[&>*:first-child]:order-2">
-                <div className="order-2 md:order-2 h-full flex flex-col justify-between p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center border-b border-base-200 md:[&>*:first-child]:order-2">
+                <div className="order-2 md:order-2 h-full flex flex-col justify-between p-8">
                   <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Retirement Planning for Your Future
                   </h3>
@@ -465,18 +466,18 @@ const Layout = () => {
                   </p>
                   <div></div>
                 </div>
-                <div className="flex justify-center order-1 md:order-1 mb-4 md:mb-0">
+                <div className="flex justify-center order-1 md:order-1 mb-4 md:mb-0 h-[40vh] md:h-auto">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/retirement.webp"}
                     alt="Retirement planning illustration"
-                    className="object-contain"
+                    className="object-cover md:object-contain h-full w-full"
                     loading="lazy"
                   />
                 </div>
               </div>
               {/* Support Area 3: Life Insurance */}
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 last:rounded-b-lg">
-                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center last:rounded-b-lg">
+                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-8">
                   <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Protecting What Matters Most
                   </h3>
@@ -497,11 +498,11 @@ const Layout = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0">
+                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0 h-[40vh] md:h-auto">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/life-insurance.webp"}
                     alt="Life insurance illustration"
-                    className="object-contain"
+                    className="object-cover md:object-contain h-full w-full"
                     loading="lazy"
                   />
                 </div>
@@ -567,7 +568,7 @@ const Layout = () => {
           id="contact"
           ref={contactRef}
           aria-label="Contact section"
-          className="flex flex-col items-center justify-center min-h-[100vh] w-full"
+          className="flex flex-col items-center justify-center min-h-[70vh] w-full"
         >
           <div
             className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200"
