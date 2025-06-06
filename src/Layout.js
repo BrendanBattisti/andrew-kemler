@@ -650,8 +650,7 @@ const Layout = () => {
           This website was independently commissioned and approved by New York
           Life. Andrew Kemler is a financial advisor with New York Life
           Insurance Company
-          <br />
-          Website Designed by Brendan Battisti
+       
         </span>
       </footer>
     </div>
