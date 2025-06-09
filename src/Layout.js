@@ -295,6 +295,8 @@ const Layout = () => {
             backgroundImage: `url(${
               process.env.PUBLIC_URL + "/imgs/background.webp"
             })`,
+            backgroundSize: "cover",
+            backgroundAttachment: "fixed",
           }}
           aria-label="Hero section with introduction"
         >
@@ -302,17 +304,18 @@ const Layout = () => {
             className="hero-overlay"
             style={{ backgroundColor: "rgba(30,41,59,0.3)" }}
           ></div>
-          <div
-            className="hero-content text-center w-4/5"
-            style={{ marginTop: "-37vh" }}
-          >
+          <div className="hero-content text-center w-1/2 ml-auto">
             <div className="w-full">
               <div ref={heroRef}>
                 <h1
-                  className="text-3xl md:text-5xl font-bold text-white w-full text-shadow-lg"
-                  style={{ marginBottom: "2rem" }}
+                  className="font-bold text-white w-full text-shadow-lg"
+                  style={{
+                    marginBottom: "2rem",
+                    fontSize: "6rem",
+                    lineHeight: "1",
+                  }}
                 >
-                  {Content.title_text}
+                  Shape Your Future.
                 </h1>
               </div>
               <div ref={heroSubtextRef}>
@@ -325,8 +328,8 @@ const Layout = () => {
                 onClick={() =>
                   aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
                 }
-                className="btn btn-primary"
-                style={{ marginTop: "2rem" }}
+                className="btn btn-primary text-lg"
+                style={{ marginTop: "2rem", padding: "1rem 2rem" }}
               >
                 {Content.button_text}
               </button>
@@ -351,10 +354,10 @@ const Layout = () => {
                 className="rounded-full object-cover h-[20vh] mb-4"
                 loading="lazy"
               />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center">
-                {Content.about_title}
-              </h2>
-              <p className="text-xl mb-4 text-center">{Content.about_text}</p>
+              <p className="text-xl mb-4 text-center">
+                "Hi, I'm Andrew, a financial advisor with New York Life, proudly
+                serving the Rochester community
+              </p>
               <p className="text-xl mb-4 text-center">{Content.about_text_2}</p>
               {Content.about_text_3 && (
                 <p className="text-xl mb-4 text-center">
@@ -366,7 +369,7 @@ const Layout = () => {
         </div>
       ) : (
         <div
-          className="hero min-h-[100vh]"
+          className="hero"
           style={{
             background:
               "linear-gradient(30deg, #f8fafc 0%,rgb(162, 168, 176) 100%)",
@@ -374,7 +377,7 @@ const Layout = () => {
           }}
           aria-label="About Andrew Kemler section"
         >
-          <div className="hero-content min-h-full w-full">
+          <div className="hero-content min-h-full w-4/5 my-10">
             <div className="card shadow-xl bg-base-100 border border-base-200">
               <div className="card-body">
                 <div className="h-4/5 m-auto">
@@ -387,7 +390,7 @@ const Layout = () => {
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2 text-base-content mb-4 h-full min-h-[70vh] pl-10 justify-center">
+                    <div className="flex flex-col w-1/2 text-base-content mb-4 h-full pl-10 justify-center">
                       <h2 className="text-3xl font-bold indent-6 mb-4">
                         {Content.about_title}
                       </h2>
@@ -417,22 +420,23 @@ const Layout = () => {
       >
         <div
           className="
-            w-full
+            sm:w-full
             md:flex md:flex-col md:items-center md:justify-center md:min-h-[60vh] 
             md:p-8
             md:bg-[linear-gradient(90deg,_#f8fafc_0%,_#e2e8f0_100%)]
             p-0
             bg-none
+            
           "
         >
-          <div className="w-full md:max-w-4xl md:m-auto">
+          <div className="sm:w-full md:w-4/5 md:m-auto">
             <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
               How I Can Help
             </h2>
             <div className=" border border-base-200 bg-base-100">
               {/* Support Area 1: Budgeting */}
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 first:rounded-t-lg">
-                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center border-b border-base-200 first:rounded-t-lg">
+                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-8">
                   <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Personalized Budgeting Guidance
                   </h3>
@@ -443,18 +447,18 @@ const Layout = () => {
                   </p>
                   <div></div>
                 </div>
-                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0">
+                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0 h-[40vh] md:h-auto">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/budgeting.webp"}
                     alt="Budgeting illustration"
-                    className="object-contain"
+                    className="object-cover md:object-contain h-full w-full"
                     loading="lazy"
                   />
                 </div>
               </div>
               {/* Support Area 2: Retirement Planning */}
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 border-b border-base-200 md:[&>*:first-child]:order-2">
-                <div className="order-2 md:order-2 h-full flex flex-col justify-between p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center border-b border-base-200 md:[&>*:first-child]:order-2">
+                <div className="order-2 md:order-2 h-full flex flex-col justify-between p-8">
                   <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Retirement Planning for Your Future
                   </h3>
@@ -465,18 +469,18 @@ const Layout = () => {
                   </p>
                   <div></div>
                 </div>
-                <div className="flex justify-center order-1 md:order-1 mb-4 md:mb-0">
+                <div className="flex justify-center order-1 md:order-1 mb-4 md:mb-0 h-[40vh] md:h-auto">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/retirement.webp"}
                     alt="Retirement planning illustration"
-                    className="object-contain"
+                    className="object-cover md:object-contain h-full w-full"
                     loading="lazy"
                   />
                 </div>
               </div>
               {/* Support Area 3: Life Insurance */}
-              <div className="grid grid-cols-1 md:grid-cols-2 items-center p-4 last:rounded-b-lg">
-                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center last:rounded-b-lg">
+                <div className="order-2 md:order-1 h-full flex flex-col justify-between p-8">
                   <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
                     Protecting What Matters Most
                   </h3>
@@ -497,11 +501,11 @@ const Layout = () => {
                     </a>
                   </div>
                 </div>
-                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0">
+                <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0 h-[40vh] md:h-auto">
                   <img
                     src={process.env.PUBLIC_URL + "/imgs/life-insurance.webp"}
                     alt="Life insurance illustration"
-                    className="object-contain"
+                    className="object-cover md:object-contain h-full w-full"
                     loading="lazy"
                   />
                 </div>
@@ -526,7 +530,7 @@ const Layout = () => {
           className="w-full max-w-4xl mb-16"
         >
           <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
-            What My Clients Say
+            Testimonials
           </h2>
           <Slider
             dots={false}
@@ -567,7 +571,7 @@ const Layout = () => {
           id="contact"
           ref={contactRef}
           aria-label="Contact section"
-          className="flex flex-col items-center justify-center min-h-[100vh] w-full"
+          className="flex flex-col items-center justify-center min-h-[70vh] w-full"
         >
           <div
             className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200"
@@ -650,7 +654,6 @@ const Layout = () => {
           This website was independently commissioned and approved by New York
           Life. Andrew Kemler is a financial advisor with New York Life
           Insurance Company
-       
         </span>
       </footer>
     </div>
