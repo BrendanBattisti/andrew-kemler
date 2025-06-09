@@ -2,12 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/src/SplitText";
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaArrowRight,
+} from "react-icons/fa";
 import Content from "./Content.json";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
 const Layout = () => {
   //Navbar ref
   const navbarRef = useRef(null);
@@ -28,9 +32,13 @@ const Layout = () => {
   const aboutBtnRef = useRef(null);
   const howICanHelpBtnRef = useRef(null);
   const getStartedBtnRef = useRef(null);
+  const testimonialsBtnRef = useRef(null);
 
   // Products ref
   const productsRef = useRef(null);
+
+  // Testimonials ref
+  const testimonialsRef = useRef(null);
 
   // Responsive state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -40,21 +48,21 @@ const Layout = () => {
 
   const scrollContainerRef = useRef(null);
 
-  useEffect(() => {
-    // Responsive handler
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+  // useEffect(() => {
+  //   // Responsive handler
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth < 768);
+  //   };
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    // Initial check (in case of SSR or hydration)
-    handleResize();
+  //   // Initial check (in case of SSR or hydration)
+  //   handleResize();
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -77,6 +85,9 @@ const Layout = () => {
           aboutBtnRef.current,
           howICanHelpBtnRef.current,
           getStartedBtnRef.current,
+          testimonialsBtnRef.current,
+          heroSubtextRef.current,
+          learnMoreRef.current,
         ],
         {
           opacity: 0,
@@ -95,24 +106,34 @@ const Layout = () => {
           stagger: 0.04,
           delay: 1,
         },
-        "-=0.5"
+        "-=0.1"
       )
-        .from(
+        .to(heroSubtextRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        })
+        .to(
           learnMoreRef.current,
           {
-            opacity: 0,
-            y: 50,
-            duration: 2,
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
             ease: "power3.out",
           },
-          "+=0.3"
+          "-=0.1"
         )
-        .to(navbarSplit.chars, {
-          opacity: 1,
-          duration: 0.05,
-          ease: "none",
-          stagger: 0.05,
-        })
+        .to(
+          navbarSplit.chars,
+          {
+            opacity: 1,
+            duration: 0.05,
+            ease: "none",
+            stagger: 0.05,
+          },
+          "<"
+        )
         .to(
           aboutBtnRef.current,
           {
@@ -121,10 +142,20 @@ const Layout = () => {
             duration: 0.4,
             ease: "power2.out",
           },
-          "+=0.1"
+          "-=0.2"
         )
         .to(
           howICanHelpBtnRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          },
+          "-=0.2"
+        )
+        .to(
+          testimonialsBtnRef.current,
           {
             opacity: 1,
             y: 0,
@@ -151,7 +182,7 @@ const Layout = () => {
       if (navbarSplit) navbarSplit.revert();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [isMobile]);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -178,6 +209,58 @@ const Layout = () => {
 
   // Add smth to scroll to about on isMobile
 
+  const NavbarButton = ({ ref, onClick, text, ariaLabel, isPrimary }) => (
+    <li className="mx-2">
+      <button
+        ref={ref}
+        onClick={onClick}
+        className={`btn ${
+          isPrimary
+            ? "btn-primary text-white text-lg bold"
+            : "btn-ghost text-lg bold"
+        } rounded-full hover:bg-white/10 ${
+          !isPrimary &&
+          (navbarWhite
+            ? "text-black hover:text-black"
+            : "text-white hover:text-white")
+        }`}
+        aria-label={ariaLabel}
+      >
+        {text} {isPrimary && <FaArrowRight className="ml-2" />}
+      </button>
+    </li>
+  );
+
+  const navbarButtons = [
+    {
+      ref: aboutBtnRef,
+      onClick: () =>
+        aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" }),
+      text: "About",
+      ariaLabel: "Scroll to About section",
+    },
+    {
+      ref: howICanHelpBtnRef,
+      onClick: () => productsRef.current.scrollIntoView({ behavior: "smooth" }),
+      text: "How I Can Help",
+      ariaLabel: "Scroll to How I Can Help section",
+    },
+    {
+      ref: testimonialsBtnRef,
+      onClick: () =>
+        testimonialsRef.current.scrollIntoView({ behavior: "smooth" }),
+      text: "Testimonials",
+      ariaLabel: "Scroll to Testimonials section",
+    },
+    {
+      ref: getStartedBtnRef,
+      onClick: () => contactRef.current.scrollIntoView({ behavior: "smooth" }),
+      text: "Get Started",
+      ariaLabel: "Scroll to Get Started contact section",
+      isPrimary: true,
+    },
+  ];
+
   return (
     <div
       ref={scrollContainerRef}
@@ -189,8 +272,10 @@ const Layout = () => {
       }}
     >
       <div
-        className={`navbar w-full transition-colors duration-300 ${
-          navbarWhite ? "bg-white shadow text-base-content" : ""
+        className={`navbar w-full transition-colors duration-300 flex-1 flex items-center text-2xl font-bold ${
+          navbarWhite
+            ? "bg-white shadow text-base-content text-black"
+            : "text-white"
         }`}
         ref={navbarRef}
         style={{
@@ -221,66 +306,24 @@ const Layout = () => {
               style={{ borderRadius: "4px" }}
             /> */}
           </a>
-          {!isMobile && (
-            <div
-              ref={navbarNameRef}
-              className={`hidden md:inline fancy_underline ${
-                navbarWhite ? "text-black" : "text-white"
-              }`}
-              initial={false}
-              animate={false}
-              exit={false}
-            >
-              Andrew Kemler
-            </div>
-          )}
+
+          <div
+            ref={navbarNameRef}
+            className={`fancy_underline ${
+              navbarWhite ? "text-black" : "text-white"
+            }`}
+            initial={false}
+            animate={false}
+            exit={false}
+          >
+            Andrew Kemler
+          </div>
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li className="mx-2">
-              <button
-                ref={aboutBtnRef}
-                onClick={() =>
-                  aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
-                }
-                className={`btn btn-ghost hover:bg-white/10 ${
-                  navbarWhite
-                    ? "text-black hover:text-black"
-                    : "text-white hover:text-white"
-                }`}
-                aria-label="Scroll to About section"
-              >
-                About
-              </button>
-            </li>
-            <li className="mx-2">
-              <button
-                ref={howICanHelpBtnRef}
-                onClick={() =>
-                  productsRef.current.scrollIntoView({ behavior: "smooth" })
-                }
-                className={`btn btn-ghost hover:bg-white/10 ${
-                  navbarWhite
-                    ? "text-black hover:text-black"
-                    : "text-white hover:text-white"
-                }`}
-                aria-label="Scroll to How I Can Help section"
-              >
-                How I Can Help
-              </button>
-            </li>
-            <li className="mx-2 mr-4">
-              <button
-                ref={getStartedBtnRef}
-                onClick={() =>
-                  contactRef.current.scrollIntoView({ behavior: "smooth" })
-                }
-                className="btn btn-primary text-white"
-                aria-label="Scroll to Get Started contact section"
-              >
-                Get Started
-              </button>
-            </li>
+            {navbarButtons.map((button, index) => (
+              <NavbarButton key={index} {...button} />
+            ))}
           </ul>
         </div>
       </div>
@@ -304,36 +347,29 @@ const Layout = () => {
             className="hero-overlay"
             style={{ backgroundColor: "rgba(30,41,59,0.3)" }}
           ></div>
-          <div className="hero-content text-center w-1/2 ml-auto">
-            <div className="w-full">
-              <div ref={heroRef}>
-                <h1
-                  className="font-bold text-white w-full text-shadow-lg"
-                  style={{
-                    marginBottom: "2rem",
-                    fontSize: "6rem",
-                    lineHeight: "1",
-                  }}
-                >
-                  Shape Your Future.
+          <div className="hero-content w-1/2 ml-auto h-1/2 flex flex-col justify-between">
+            <div>
+              <div ref={heroRef} className="mb-10">
+                <h1 className="font-bold text-white text-center w-full text-shadow-lg text-4xl md:text-5xl">
+                  Money Made Simple.
                 </h1>
               </div>
               <div ref={heroSubtextRef}>
                 <p className="text-lg text-white text-shadow-lg">
-                  {Content.title_description}
+                  Personalized financial guidance for your 20s, 30s, and beyond.
                 </p>
               </div>
-              <button
-                ref={learnMoreRef}
-                onClick={() =>
-                  aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
-                }
-                className="btn btn-primary text-lg"
-                style={{ marginTop: "2rem", padding: "1rem 2rem" }}
-              >
-                {Content.button_text}
-              </button>
             </div>
+            <button
+              ref={learnMoreRef}
+              onClick={() =>
+                aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+              className="btn btn-primary text-lg rounded-full"
+              style={{ marginTop: "2rem", padding: "1rem 2rem" }}
+            >
+              {Content.button_text} <FaArrowRight className="ml-2" />
+            </button>
           </div>
         </h2>
       </div>
@@ -526,6 +562,7 @@ const Layout = () => {
         {/* Testimonials */}
         <div
           id="testimonials"
+          ref={testimonialsRef}
           aria-label="Testimonials section"
           className="w-full max-w-4xl mb-16"
         >
