@@ -351,10 +351,10 @@ const Layout = () => {
                 className="rounded-full object-cover h-[20vh] mb-4"
                 loading="lazy"
               />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-center">
-                {Content.about_title}
-              </h2>
-              <p className="text-xl mb-4 text-center">{Content.about_text}</p>
+              <p className="text-xl mb-4 text-center">
+                "Hi, I'm Andrew, a financial advisor with New York Life, proudly
+                serving the Rochester community
+              </p>
               <p className="text-xl mb-4 text-center">{Content.about_text_2}</p>
               {Content.about_text_3 && (
                 <p className="text-xl mb-4 text-center">
@@ -527,7 +527,7 @@ const Layout = () => {
           className="w-full max-w-4xl mb-16"
         >
           <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
-            What My Clients Say
+            Testimonials
           </h2>
           <Slider
             dots={false}
@@ -651,8 +651,6 @@ const Layout = () => {
           This website was independently commissioned and approved by New York
           Life. Andrew Kemler is a financial advisor with New York Life
           Insurance Company
-          <br />
-          Website Designed by Brendan Battisti
         </span>
       </footer>
     </div>
