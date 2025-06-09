@@ -193,7 +193,7 @@ const Layout = () => {
           navbarWhite ? "bg-white shadow text-base-content" : ""
         }`}
         ref={navbarRef}
-        style={{
+        style={{          
           position: "absolute",
           top: 0,
           left: 0,
@@ -295,6 +295,8 @@ const Layout = () => {
             backgroundImage: `url(${
               process.env.PUBLIC_URL + "/imgs/background.webp"
             })`,
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed'
           }}
           aria-label="Hero section with introduction"
         >
@@ -303,16 +305,15 @@ const Layout = () => {
             style={{ backgroundColor: "rgba(30,41,59,0.3)" }}
           ></div>
           <div
-            className="hero-content text-center w-4/5"
-            style={{ marginTop: "-37vh" }}
+            className="hero-content text-center w-1/2 ml-auto"
           >
             <div className="w-full">
               <div ref={heroRef}>
                 <h1
-                  className="text-3xl md:text-5xl font-bold text-white w-full text-shadow-lg"
-                  style={{ marginBottom: "2rem" }}
+                  className="font-bold text-white w-full text-shadow-lg"
+                  style={{ marginBottom: "2rem", fontSize: "6rem", lineHeight: "1" }}
                 >
-                  {Content.title_text}
+                  Shape Your Future.
                 </h1>
               </div>
               <div ref={heroSubtextRef}>
@@ -325,8 +326,8 @@ const Layout = () => {
                 onClick={() =>
                   aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
                 }
-                className="btn btn-primary"
-                style={{ marginTop: "2rem" }}
+                className="btn btn-primary text-lg"
+                style={{ marginTop: "2rem", padding: "1rem 2rem" }}
               >
                 {Content.button_text}
               </button>
