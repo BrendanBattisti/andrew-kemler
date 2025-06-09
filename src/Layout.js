@@ -16,6 +16,10 @@ import Navbar from "./Sections/Navbar";
 import TitleHero from "./Sections/TitleHero";
 import About from "./Sections/About";
 import Products from "./Products";
+import Testimonials from "./Sections/Testimonials";
+import Contact from "./Sections/Contact";
+import Footer from "./Sections/Footer";
+
 const Layout = () => {
   //Navbar ref
   const navbarRef = useRef(null);
@@ -243,184 +247,6 @@ const Layout = () => {
     },
   ];
 
-  const testimonials = (
-    <div
-      style={{
-        scrollSnapAlign: "start",
-        background: "#f8fafc",
-      }}
-      className="flex flex-col items-center justify-center p-8"
-    >
-      {/* Testimonials */}
-      <div
-        id="testimonials"
-        ref={testimonialsRef}
-        aria-label="Testimonials section"
-        className="w-full max-w-4xl mb-16"
-      >
-        <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
-          Testimonials
-        </h2>
-        {isMobile ? (
-          <Slider
-            dots={false}
-            infinite={true}
-            speed={500}
-            slidesToShow={1}
-            slidesToScroll={1}
-            autoplay={true}
-            autoplaySpeed={3500}
-          >
-            {Content.testimonials &&
-              Content.testimonials.map((testimonial, idx) => (
-                <div className="px-2" key={idx}>
-                  <div className="card bg-base-100 shadow-xl">
-                    <div className="card-body">
-                      <div className="flex items-center mb-4">
-                        <div className="avatar placeholder">
-                          <div className="bg-neutral text-neutral-content rounded-full w-12">
-                            <span className="text-xl">
-                              {testimonial.author.charAt(0)}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="ml-4">
-                          <h3 className="font-bold">{testimonial.author}</h3>
-                        </div>
-                      </div>
-                      <p className="text-base italic">"{testimonial.text}"</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </Slider>
-        ) : (
-          <div className="grid grid-cols-3 gap-4">
-            {Content.testimonials &&
-              Content.testimonials.map((testimonial, idx) => (
-                <div key={idx}>
-                  <div className="card bg-base-100 shadow-xl h-full">
-                    <div className="card-body">
-                      <div className="flex items-center mb-4">
-                        <div className="avatar placeholder">
-                          <div className="bg-neutral text-neutral-content rounded-full w-12">
-                            <span className="text-xl">
-                              {testimonial.author.charAt(0)}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="ml-4">
-                          <h3 className="font-bold">{testimonial.author}</h3>
-                        </div>
-                      </div>
-                      <p className="text-base italic">"{testimonial.text}"</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
-  const contact = (
-    <div>
-      <div
-        id="contact"
-        ref={contactRef}
-        aria-label="Contact section"
-        className="flex flex-col items-center justify-center min-h-[70vh] w-full"
-      >
-        <div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl px-4">
-          <div
-            className="card w-full max-w-md shadow-xl bg-base-100 border border-base-200"
-            aria-label="Contact information card"
-          >
-            <div className="card-body">
-              <h1 className="card-title text-xl font-bold text-[#2C3E50] mb-4">
-                {Content.contact_title}
-              </h1>
-              <div className="flex flex-col">
-                <div className="flex flex-row items-center mb-2">
-                  <div className="h-full flex items-center">
-                    <FaMapMarkerAlt className="mr-2" />
-                  </div>
-                  <div>
-                    <a
-                      href="https://www.google.com/maps/search/?api=1&query=209+HIGH+POINT+DRIVE+VICTOR+NY+14564"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                      aria-label="View office location on Google Maps"
-                    >
-                      {Content.contact_address.split(",")[0]}
-                      <br />
-                      NEW YORK LIFE INSURANCE, VICTOR, NEW YORK 14564
-                    </a>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center mb-2">
-                  <div className="h-full flex items-center">
-                    <FaPhoneAlt className="mr-2" />
-                  </div>
-                  <div>
-                    <a
-                      href={`tel:${Content.contact_phone.replace(
-                        /[^\d]/g,
-                        ""
-                      )}`}
-                      className="text-primary hover:underline"
-                      aria-label={`Call ${Content.contact_phone}`}
-                    >
-                      {Content.contact_phone}
-                    </a>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center mb-2">
-                  <div className="h-full flex items-center">
-                    <FaEnvelope className="mr-2" />
-                  </div>
-                  <div>
-                    <a
-                      href={`mailto:${Content.contact_email}`}
-                      className="text-primary hover:underline"
-                      aria-label={`Send email to ${Content.contact_email}`}
-                    >
-                      {Content.contact_email}
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="alert alert-info text-sm mt-4"
-                aria-label="Contact instructions"
-              >
-                Please reach out by phone or email for all inquiries.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const footer = (
-    <footer
-      className="w-full bg-base-200 text-base-content text-center py-4 border-t border-base-300 text-sm"
-      aria-label="Site disclaimer and copyright"
-      style={{
-        scrollSnapAlign: "start",
-      }}
-    >
-      <span>
-        This website was independently commissioned and approved by New York
-        Life. Andrew Kemler is a financial advisor with New York Life Insurance
-        Company
-      </span>
-    </footer>
-  );
-
   return (
     <div
       ref={scrollContainerRef}
@@ -445,9 +271,13 @@ const Layout = () => {
       />
       <About isMobile={isMobile} />
       <Products productsRef={productsRef} />
-      {testimonials}
-      {contact}
-      {footer}
+      <Testimonials
+        testimonialsRef={testimonialsRef}
+        isMobile={isMobile}
+        isMobile={isMobile}
+      />
+      <Contact contactRef={contactRef} />
+      <Footer />
     </div>
   );
 };
