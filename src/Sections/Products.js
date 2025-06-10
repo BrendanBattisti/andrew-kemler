@@ -19,7 +19,7 @@ const Products = ({ productsRef }) => (
             
           "
     >
-      <div className="sm:w-full md:w-4/5 md:m-auto">
+      <div className="sm:w-full md:w-4/5 md:m-auto pt-10">
         <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
           How I Can Help
         </h2>

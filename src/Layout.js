@@ -120,7 +120,7 @@ const Layout = () => {
           onComplete: () => {
             const combinedDiv = document.createElement("div");
             combinedDiv.className =
-              "font-bold text-white text-center w-full text-4xl md:text-7xl font-sans break-words";
+              "font-bold text-white text-right md:text-center w-full text-4xl md:text-7xl font-sans break-words";
             combinedDiv.textContent = "Money Made Simple.";
 
             heroRef.current.innerHTML = "";
