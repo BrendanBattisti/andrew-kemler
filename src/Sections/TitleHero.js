@@ -29,13 +29,13 @@ const TitleHero = ({
       ></div>
       <div className="hero-content w-1/2 ml-auto h-1/2 flex flex-col justify-between">
         <div>
-          <div ref={heroRef} className="mb-10">
-            <h1 className="font-bold text-white text-center w-full text-shadow-lg text-4xl md:text-5xl">
+          <div ref={heroRef} className="mb-10 transition-all duration-500">
+            <h1 className="font-bold text-white text-center w-full text-4xl md:text-7xl font-sans break-words">
               Money Made Simple.
             </h1>
           </div>
           <div ref={heroSubtextRef}>
-            <p className="text-lg text-white text-shadow-lg">
+            <p className="text-2xl text-white font-sans font-content text-center break-words">
               Personalized financial guidance for your 20s, 30s, and beyond.
             </p>
           </div>
@@ -45,8 +45,8 @@ const TitleHero = ({
           onClick={() =>
             aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
           }
-          className="btn btn-primary text-lg rounded-full"
-          style={{ marginTop: "2rem", padding: "1rem 2rem" }}
+          className="btn btn-primary text-2xl rounded-full"
+          style={{ marginTop: "2rem" }}
         >
           {Content.button_text} <FaArrowRight className="ml-2" />
         </button>

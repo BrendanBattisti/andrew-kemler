@@ -2,20 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/src/SplitText";
-import {
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaArrowRight,
-} from "react-icons/fa";
-import Content from "./Content.json";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import Navbar from "./Sections/Navbar";
 import TitleHero from "./Sections/TitleHero";
 import About from "./Sections/About";
-import Products from "./Products";
+import Products from "./Sections/Products";
 import Testimonials from "./Sections/Testimonials";
 import Contact from "./Sections/Contact";
 import Footer from "./Sections/Footer";
@@ -31,7 +23,7 @@ const Layout = () => {
 
   // About refs
   const contactRef = useRef(null);
-  const aboutAnchorRef = useRef(null);
+  const aboutRef = useRef(null);
 
   // Navbar name ref
   const navbarNameRef = useRef(null);
@@ -121,6 +113,19 @@ const Layout = () => {
           y: 0,
           duration: 0.5,
           ease: "power3.out",
+        })
+        .to(titleSplit.chars, {
+          duration: 0.5,
+          ease: "power2.inOut",
+          onComplete: () => {
+            const combinedDiv = document.createElement("div");
+            combinedDiv.className =
+              "font-bold text-white text-center w-full text-4xl md:text-7xl font-sans break-words";
+            combinedDiv.textContent = "Money Made Simple.";
+
+            heroRef.current.innerHTML = "";
+            heroRef.current.appendChild(combinedDiv);
+          },
         })
         .to(
           learnMoreRef.current,
@@ -220,8 +225,7 @@ const Layout = () => {
   const navbarButtons = [
     {
       ref: aboutBtnRef,
-      onClick: () =>
-        aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" }),
+      onClick: () => aboutRef.current.scrollIntoView({ behavior: "smooth" }),
       text: "About",
       ariaLabel: "Scroll to About section",
     },
@@ -267,15 +271,11 @@ const Layout = () => {
         heroRef={heroRef}
         heroSubtextRef={heroSubtextRef}
         learnMoreRef={learnMoreRef}
-        aboutAnchorRef={aboutAnchorRef}
+        aboutAnchorRef={aboutRef}
       />
-      <About isMobile={isMobile} />
+      <About isMobile={isMobile} aboutRef={aboutRef} />
       <Products productsRef={productsRef} />
-      <Testimonials
-        testimonialsRef={testimonialsRef}
-        isMobile={isMobile}
-        isMobile={isMobile}
-      />
+      <Testimonials testimonialsRef={testimonialsRef} isMobile={isMobile} />
       <Contact contactRef={contactRef} />
       <Footer />
     </div>

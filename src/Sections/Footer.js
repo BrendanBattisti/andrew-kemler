@@ -6,7 +6,7 @@ const Footer = () => (
       scrollSnapAlign: "start",
     }}
   >
-    <span>
+    <span className="font-content">
       This website was independently commissioned and approved by New York Life.
       Andrew Kemler is a financial advisor with New York Life Insurance Company
     </span>

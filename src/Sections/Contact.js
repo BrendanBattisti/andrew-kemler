@@ -28,7 +28,7 @@ const Contact = ({ contactRef }) => (
                     href="https://www.google.com/maps/search/?api=1&query=209+HIGH+POINT+DRIVE+VICTOR+NY+14564"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary hover:underline"
+                    className="text-primary hover:underline font-content"
                     aria-label="View office location on Google Maps"
                   >
                     {Content.contact_address.split(",")[0]}
@@ -44,7 +44,7 @@ const Contact = ({ contactRef }) => (
                 <div>
                   <a
                     href={`tel:${Content.contact_phone.replace(/[^\d]/g, "")}`}
-                    className="text-primary hover:underline"
+                    className="text-primary hover:underline font-content"
                     aria-label={`Call ${Content.contact_phone}`}
                   >
                     {Content.contact_phone}
@@ -58,7 +58,7 @@ const Contact = ({ contactRef }) => (
                 <div>
                   <a
                     href={`mailto:${Content.contact_email}`}
-                    className="text-primary hover:underline"
+                    className="text-primary hover:underline font-content"
                     aria-label={`Send email to ${Content.contact_email}`}
                   >
                     {Content.contact_email}
@@ -67,7 +67,7 @@ const Contact = ({ contactRef }) => (
               </div>
             </div>
             <div
-              className="alert alert-info text-sm mt-4"
+              className="alert alert-info text-sm mt-4 font-content"
               aria-label="Contact instructions"
             >
               Please reach out by phone or email for all inquiries.

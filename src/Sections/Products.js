@@ -27,10 +27,10 @@ const Products = ({ productsRef }) => (
           {/* Support Area 1: Budgeting */}
           <div className="grid grid-cols-1 md:grid-cols-2 items-center border-b border-base-200 first:rounded-t-lg">
             <div className="order-2 md:order-1 h-full flex flex-col justify-between p-8">
-              <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
+              <h3 className="card-title text-lg md:text-4xl font-semibold mb-2">
                 Personalized Budgeting Guidance
               </h3>
-              <p className="text-base md:text-lg text-base-content">
+              <p className="text-base md:text-lg text-base-content font-content">
                 Understanding where your money goes is the first step toward{" "}
                 <b>financial wellness</b>. Together, we'll create a strategy
                 that supports your lifestyle — now and in the future.
@@ -49,10 +49,10 @@ const Products = ({ productsRef }) => (
           {/* Support Area 2: Retirement Planning */}
           <div className="grid grid-cols-1 md:grid-cols-2 items-center border-b border-base-200 md:[&>*:first-child]:order-2">
             <div className="order-2 md:order-2 h-full flex flex-col justify-between p-8">
-              <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
+              <h3 className="card-title text-lg md:text-4xl font-semibold mb-2">
                 Retirement Planning for Your Future
               </h3>
-              <p className="text-base md:text-lg text-base-content">
+              <p className="text-base md:text-lg text-base-content font-content">
                 A fulfilling retirement doesn't happen by accident. Let's put a
                 plan in place today that gives you the <b>freedom</b> and{" "}
                 <b>peace of mind</b> you deserve later.
@@ -71,10 +71,10 @@ const Products = ({ productsRef }) => (
           {/* Support Area 3: Life Insurance */}
           <div className="grid grid-cols-1 md:grid-cols-2 items-center last:rounded-b-lg">
             <div className="order-2 md:order-1 h-full flex flex-col justify-between p-8">
-              <h3 className="card-title text-lg md:text-2xl font-semibold mb-2">
+              <h3 className="card-title text-lg md:text-4xl font-semibold mb-2">
                 Protecting What Matters Most
               </h3>
-              <p className="text-base md:text-lg text-base-content">
+              <p className="text-base md:text-lg text-base-content font-content">
                 Protect your loved ones while <b>growing your wealth</b>. A
                 custom whole life policy from New York Life helps you invest{" "}
                 <b>confidently</b> without sacrificing <b>security</b>.

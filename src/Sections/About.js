@@ -1,5 +1,5 @@
 import Content from "../Content";
-const About = ({ isMobile }) =>
+const About = ({ isMobile, aboutRef }) =>
   isMobile ? (
     <div
       className="hero min-h-[100vh] bg-base-100"
@@ -7,6 +7,7 @@ const About = ({ isMobile }) =>
         scrollSnapAlign: "start",
       }}
       aria-label="About Andrew Kemler section"
+      ref={aboutRef}
     >
       <div className="mx-auto w-4/5">
         <div className="hero-content min-h-full w-full flex flex-col justify-evenly px-2 sm:px-4">
@@ -35,6 +36,7 @@ const About = ({ isMobile }) =>
         scrollSnapAlign: "start",
       }}
       aria-label="About Andrew Kemler section"
+      ref={aboutRef}
     >
       <div className="hero-content min-h-full w-4/5 my-10">
         <div className="card shadow-xl bg-base-100 border border-base-200">
@@ -50,15 +52,19 @@ const About = ({ isMobile }) =>
                   />
                 </div>
                 <div className="flex flex-col w-1/2 text-base-content mb-4 h-full pl-10 justify-center">
-                  <h2 className="text-3xl font-bold indent-6 mb-4">
+                  <h2 className="text-3xl font-bold indent-6 mb-4 font-content">
                     {Content.about_title}
                   </h2>
                   <div className="flex flex-col justify-evenly h-4/5">
-                    <p className="text-lg indent-6 mb-4">
+                    <p className="text-lg indent-6 mb-4 font-content">
                       {Content.about_text}
                     </p>
-                    <p className="text-lg mb-4">{Content.about_text_2}</p>
-                    <p className="text-lg mb-4">{Content.about_text_3}</p>
+                    <p className="text-lg mb-4 font-content">
+                      {Content.about_text_2}
+                    </p>
+                    <p className="text-lg mb-4 font-content">
+                      {Content.about_text_3}
+                    </p>
                   </div>
                 </div>
               </div>
