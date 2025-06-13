@@ -5,30 +5,32 @@ import { HiMenu } from "react-icons/hi";
 const Navbar = ({ navbarWhite, navbarButtons, navbarRef, navbarNameRef }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const NavbarButton = ({ ref, onClick, text, ariaLabel, isPrimary }) => (
+  const NavbarButton = ({ buttonRef, onClick, text, ariaLabel, isPrimary }) => (
     <li className="mx-2">
       <button
-        ref={ref}
+        ref={buttonRef}
         onClick={onClick}
-        className={`btn text-xl ${
-          isPrimary ? "btn-primary text-white bold" : "btn-ghost bold"
-        } rounded-full hover:bg-white/10 ${
+        className={`px-4 py-2 text-xl rounded-full transition-colors duration-200 ${
+          isPrimary 
+            ? "bg-blue-600 text-white hover:bg-blue-700" 
+            : "hover:bg-white/10"
+        } ${
           navbarWhite
             ? "text-black hover:text-black"
             : "text-white hover:text-white"
         }`}
         aria-label={ariaLabel}
       >
-        {text} {isPrimary && <FaArrowRight className="ml-2" />}
+        {text} {isPrimary && <FaArrowRight className="ml-2 inline" />}
       </button>
     </li>
   );
 
   return (
     <div
-      className={`navbar w-full transition-colors duration-300 flex-1 flex items-center font-bold text-2xl ${
+      className={`w-full transition-colors duration-300 flex-1 flex items-center font-bold text-2xl p-4 ${
         navbarWhite
-          ? "bg-white shadow text-base-content text-[#2C3E50]"
+          ? "bg-white shadow text-[#2C3E50]"
           : "text-white"
       }`}
       ref={navbarRef}
@@ -66,9 +68,6 @@ const Navbar = ({ navbarWhite, navbarButtons, navbarRef, navbarNameRef }) => {
           className={`fancy_underline ${
             navbarWhite ? "text-[#2C3E50]" : "text-white"
           }`}
-          initial={false}
-          animate={false}
-          exit={false}
         >
           Andrew Kemler
         </div>
@@ -76,9 +75,16 @@ const Navbar = ({ navbarWhite, navbarButtons, navbarRef, navbarNameRef }) => {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex flex-none">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="flex items-center px-1">
           {navbarButtons.map((button, index) => (
-            <NavbarButton key={index} {...button} />
+            <NavbarButton 
+              key={index} 
+              buttonRef={button.ref}
+              onClick={button.onClick}
+              text={button.text}
+              ariaLabel={button.ariaLabel}
+              isPrimary={button.isPrimary}
+            />
           ))}
         </ul>
       </div>
@@ -87,7 +93,7 @@ const Navbar = ({ navbarWhite, navbarButtons, navbarRef, navbarNameRef }) => {
       <div className="md:hidden flex-none">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={`btn btn-ghost ${
+          className={`p-2 hover:bg-white/10 rounded-lg transition-colors duration-200 ${
             navbarWhite ? "text-black" : "text-white"
           }`}
           aria-label="Toggle menu"
@@ -112,7 +118,7 @@ const Navbar = ({ navbarWhite, navbarButtons, navbarRef, navbarNameRef }) => {
           <div className="flex justify-end mb-4">
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`btn btn-ghost ${
+              className={`p-2 hover:bg-white/10 rounded-lg transition-colors duration-200 ${
                 navbarWhite ? "text-black" : "text-white"
               }`}
               aria-label="Close menu"
@@ -120,7 +126,7 @@ const Navbar = ({ navbarWhite, navbarButtons, navbarRef, navbarNameRef }) => {
               ×
             </button>
           </div>
-          <ul className="menu menu-vertical gap-4">
+          <ul className="flex flex-col gap-4">
             {navbarButtons.map((button, index) => (
               <li key={index} className="mb-2">
                 <button
@@ -128,16 +134,16 @@ const Navbar = ({ navbarWhite, navbarButtons, navbarRef, navbarNameRef }) => {
                     button.onClick();
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`btn w-full text-2xl text-left ${
+                  className={`w-full text-2xl text-left px-4 py-2 rounded-lg transition-colors duration-200 ${
                     button.isPrimary && !isMobileMenuOpen
-                      ? "btn-primary"
-                      : "btn-ghost"
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "hover:bg-white/10"
                   }`}
                   aria-label={button.ariaLabel}
                 >
                   {button.text}
                   {button.isPrimary && !isMobileMenuOpen && (
-                    <FaArrowRight className="ml-2" />
+                    <FaArrowRight className="ml-2 inline" />
                   )}
                 </button>
               </li>

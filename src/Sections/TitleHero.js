@@ -1,62 +1,87 @@
 import { FaArrowRight } from "react-icons/fa";
-import Content from "../Content";
+import { useEffect, useRef } from "react";
 
 const TitleHero = ({
   heroRef,
   heroSubtextRef,
   learnMoreRef,
   aboutAnchorRef,
-}) => (
-  <div
-    style={{
-      scrollSnapAlign: "start",
-    }}
-  >
-    <h2
-      className="hero min-h-[100vh] relative"
+}) => {
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!contentRef.current) return;
+      const scrollY = window.scrollY;
+      const translateY = scrollY * 0.5; // Adjust this value to control parallax intensity
+      contentRef.current.style.transform = `translateY(${translateY}px)`;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div
       style={{
-        backgroundImage: `url(${
-          process.env.PUBLIC_URL + "/imgs/background.webp"
-        })`,
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
+        scrollSnapAlign: "start",
       }}
-      aria-label="Hero section with introduction"
     >
-      {/* Base overlay */}
-      <div
-        className="hero-overlay"
-        style={{ backgroundColor: "rgba(30,41,59,0.3)" }}
-      ></div>
+      <h2
+        className="min-h-[100vh] relative flex items-end md:items-center overflow-hidden"
+        aria-label="Hero section with introduction"
+      >
+        {/* Background image container */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${
+              process.env.PUBLIC_URL + "/imgs/background2.jpg"
+            })`,
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundAttachment: "fixed",
+            transform: "scaleX(-1)",
+          }}
+        />
 
-      {/* Mobile-specific darker overlay */}
-      <div className="absolute inset-0 bg-black/25 md:hidden"></div>
+        {/* Base overlay */}
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: "rgba(30,41,59,0.3)" }}
+        ></div>
 
-      <div className="hero-content w-full md:w-1/2 md:ml-auto h-full md:h-1/2 flex flex-col justify-end md:justify-between p-8 md:p-0 relative z-10">
-        <div className="flex flex-col gap-8 w-full">
-          <div ref={heroRef} className="md:mb-10 w-full">
-            <h1 className="font-bold text-white text-right md:text-center w-full text-4xl md:text-7xl font-sans break-words">
-              Money Made Simple.
-            </h1>
-          </div>
-          <div ref={heroSubtextRef}>
-            <p className="text-2xl text-white font-sans font-content text-right md:text-center break-words">
-              Personalized financial guidance for your 20s, 30s, and beyond.
-            </p>
+        {/* Mobile-specific darker overlay */}
+        <div className="absolute inset-0 bg-black/25 md:hidden"></div>
+        
+        <div className="flex h-full w-full flex-col md:flex-row">
+          <div className="w-full md:w-1/2 flex flex-col p-8 md:p-0 relative z-10 md:ml-8 gap-4 sm:gap-8">
+            <div ref={heroRef} className="md:mb-10 w-full">
+              <h1 className="font-bold text-white text-left w-full text-5xl md:text-8xl font-sans">
+                <span className="inline-block w-full">Money Made Simple.</span>
+              </h1>
+            </div>
+            <div ref={heroSubtextRef}>
+              <p className="text-2xl text-white font-content">
+                <span className="inline-block w-full">
+                  Personalized financial guidance for your 20s, 30s, and beyond.
+                </span>
+              </p>
+            </div>
+            <button
+              ref={learnMoreRef}
+              onClick={() =>
+                aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+              className="bg-blue-600 hover:bg-blue-700 text-white text-2xl rounded-full px-6 py-3 transition-colors duration-200 md:mt-8 flex items-center w-fit self-start"
+            >
+              Learn More <FaArrowRight className="ml-2 inline" />
+            </button>
           </div>
         </div>
-        <button
-          ref={learnMoreRef}
-          onClick={() =>
-            aboutAnchorRef.current.scrollIntoView({ behavior: "smooth" })
-          }
-          className="btn btn-primary text-2xl rounded-full mt-8 sm:mt-0 sm:self-end"
-        >
-          {Content.button_text} <FaArrowRight className="ml-2" />
-        </button>
-      </div>
-    </h2>
-  </div>
-);
+      </h2>
+    </div>
+  );
+};
 
 export default TitleHero;

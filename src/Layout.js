@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitText from "gsap/src/SplitText";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navbar from "./Sections/Navbar";
@@ -65,21 +64,12 @@ const Layout = () => {
   }, []);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger, SplitText);
-
-    let titleSplit;
-    let navbarSplit;
+    gsap.registerPlugin(ScrollTrigger);
 
     if (heroRef.current && heroSubtextRef.current && learnMoreRef.current) {
-      titleSplit = new SplitText(heroRef.current, {
-        type: "chars",
-      });
-
-      navbarSplit = new SplitText(navbarNameRef.current, { type: "chars" });
-
-      // Hide all characters and buttons initially
-      gsap.set(titleSplit.chars, { opacity: 0 });
-      gsap.set(navbarSplit.chars, { opacity: 0 });
+      // Hide all elements initially
+      gsap.set(heroRef.current, { opacity: 0, y: 20 });
+      gsap.set(navbarNameRef.current, { opacity: 0, y: 20 });
       gsap.set(
         [
           aboutBtnRef.current,
@@ -97,35 +87,18 @@ const Layout = () => {
 
       const tl = gsap.timeline();
 
-      tl.to(
-        titleSplit.chars,
-        {
-          opacity: 1,
-          duration: 0.05,
-          ease: "none",
-          stagger: 0.04,
-          delay: 1,
-        },
-        "-=0.1"
-      )
+      tl.to(heroRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        delay: 1,
+      })
         .to(heroSubtextRef.current, {
           opacity: 1,
           y: 0,
           duration: 0.5,
           ease: "power3.out",
-        })
-        .to(titleSplit.chars, {
-          duration: 0.5,
-          ease: "power2.inOut",
-          onComplete: () => {
-            const combinedDiv = document.createElement("div");
-            combinedDiv.className =
-              "font-bold text-white text-right md:text-center w-full text-4xl md:text-7xl font-sans break-words";
-            combinedDiv.textContent = "Money Made Simple.";
-
-            heroRef.current.innerHTML = "";
-            heroRef.current.appendChild(combinedDiv);
-          },
         })
         .to(
           learnMoreRef.current,
@@ -134,19 +107,15 @@ const Layout = () => {
             y: 0,
             duration: 0.5,
             ease: "power3.out",
-          },
-          "-=0.1"
+          }
+         
         )
-        .to(
-          navbarSplit.chars,
-          {
-            opacity: 1,
-            duration: 0.05,
-            ease: "none",
-            stagger: 0.05,
-          },
-          "<"
-        )
+        .to(navbarNameRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        }, "-=0.3")
         .to(
           aboutBtnRef.current,
           {
@@ -191,8 +160,6 @@ const Layout = () => {
 
     // Cleanup
     return () => {
-      if (titleSplit) titleSplit.revert();
-      if (navbarSplit) navbarSplit.revert();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
@@ -219,8 +186,6 @@ const Layout = () => {
       }
     };
   }, []);
-
-  // Add smth to scroll to about on isMobile
 
   const navbarButtons = [
     {
