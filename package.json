@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@tailwindcss/postcss": "^4.1.8",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -22,7 +21,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
-    "tailwindcss": "^4.1.6",
+    "tailwindcss": "^4.1.10",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -52,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
     "daisyui": "^5.0.35"
   },
   "homepage": "https://andrewkemler.com/"
