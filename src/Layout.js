@@ -4,6 +4,8 @@ import Hero from "./Hero/Hero";
 import About from "./About/About";
 import Services from "./Services/Services";
 import { useState, useEffect } from "react";
+import Contact from "./Contact/Contact";
+import Footer from "./Footer/Footer";
 
 const Layout = () => {
   const backgroundUrlDesktop = process.env.PUBLIC_URL + "/imgs/background2.jpg";
@@ -53,6 +55,8 @@ const Layout = () => {
         </div>
         <About />
         <Services />
+        <Contact />
+        <Footer />
       </div>
     </div>
   );
