@@ -1,11 +1,11 @@
 import "@fontsource/urbanist";
-import Navbar from "./Hero/Navbar/Navbar";
-import Hero from "./Hero/Hero";
-import About from "./About/About";
-import Services from "./Services/Services";
+import Navbar from "./Sections/Navbar";
+import Hero from "./Sections/Hero";
+import About from "./Sections/About";
+import Footer from "./Sections/Footer";
+import Services from "./Sections/Services";
+import Contact from "./Sections/Contact";
 import { useState, useEffect } from "react";
-import Contact from "./Contact/Contact";
-import Footer from "./Footer/Footer";
 
 const Layout = () => {
   const backgroundUrlDesktop = process.env.PUBLIC_URL + "/imgs/background2.jpg";
@@ -46,10 +46,9 @@ const Layout = () => {
           })`,
         }}
       />
-
-      <div className="absolute z-10 h-screen w-screen bg-black bg-opacity-25 md:bg-opacity-25"></div>
-      <div className="absolute z-20 w-screen">
-        <div className="w-screen h-screen">
+      <div className="fixed z-10 h-screen w-full bg-black bg-opacity-25 md:bg-opacity-25"></div>
+      <div className="absolute z-20 w-full">
+        <div className="w-full h-screen">
           <Navbar />
           <Hero />
         </div>

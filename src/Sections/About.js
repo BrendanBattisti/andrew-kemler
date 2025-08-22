@@ -2,7 +2,7 @@ const About = () => {
   const andrewImage = process.env.PUBLIC_URL + "/imgs/andrew.webp";
 
   return (
-    <div className="bg-white min-h-[80vh]">
+    <div className="bg-white min-h-[80vh] rounded-t-2xl">
       <div className="w-full md:w-3/5 mx-auto pt-16 px-6">
         <div className="grid gird-cols-1 md:grid-cols-2 gap-6">
           <div className="text-black px-4 h-full flex flex-col justify-evenly">

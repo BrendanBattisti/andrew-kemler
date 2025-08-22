@@ -1,4 +1,4 @@
-import { FaArrowRight } from "react-icons/fa";
+import CTAButton from "../Components/CTAButton";
 
 const Navbar = () => {
   function Link(text, url) {
@@ -17,25 +17,7 @@ const Navbar = () => {
       <div className="md:flex flex-row justify-end w-3/4 gap-6 hidden ">
         {Link("About", "#about")}
         {Link("Services", "#services")}
-        <button
-          className="
-                    w-fit
-                    px-4 py-2
-                    rounded-full
-                    bg-primary
-                    border border-transparent
-
-                    hover:bg-white/10
-                    hover:text-primary
-                    hover:border-primary
-                    transition-all duration-300 ease-in-out
-                    whitespace-nowrap
-                    "
-          href="#contact"
-        >
-          <h3 className="text-white">Get Started</h3>
-          <FaArrowRight className="ml-4 my-auto" />
-        </button>
+        <CTAButton text="Get started" />
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
+import CTAButton from "../Components/CTAButton";
 
 const Hero = () => {
   return (
@@ -7,10 +8,7 @@ const Hero = () => {
       <p className="text-white md:mt-10 mb-4 md:w-2/5 w-3/5">
         Personalized financial guidance for your 20s, 30s, and beyond.
       </p>
-      <button className="w-fit md:mb-32 mb-4 mt-4">
-        Learn More
-        <FaArrowRight className="ml-4 my-auto" />
-      </button>
+      <CTAButton text="Learn More" />
     </div>
   );
 };
