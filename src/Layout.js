@@ -5,12 +5,14 @@ import About from "./Sections/About";
 import Footer from "./Sections/Footer";
 import Services from "./Sections/Services";
 import Contact from "./Sections/Contact";
+import Testimonials from "./Sections/Testimonials";
 import { useState, useEffect } from "react";
 
 const Layout = () => {
-  const backgroundUrlDesktop = process.env.PUBLIC_URL + "/imgs/background2.jpg";
+  const backgroundUrlDesktop =
+    process.env.PUBLIC_URL + "/imgs/background2.webp";
   const backgroundUrlMobile =
-    process.env.PUBLIC_URL + "/imgs/background2Mobile.jpg";
+    process.env.PUBLIC_URL + "/imgs/background2Mobile.webp";
   const breakpoint = 768;
 
   const [isMobile, setIsMobile] = useState(() => {
@@ -54,6 +56,7 @@ const Layout = () => {
         </div>
         <About />
         <Services />
+        <Testimonials />
         <Contact />
         <Footer />
       </div>

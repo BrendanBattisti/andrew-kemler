@@ -21,7 +21,11 @@ const About = () => {
               Kaylie, and our energetic corgi, Forrest.
             </p>
           </div>
-          <img src={andrewImage} className="mx-auto rounded-xl w-full"></img>
+          <img
+            src={andrewImage}
+            className="mx-auto rounded-xl w-full"
+            alt="Andrew Smiling in a suit"
+          />
         </div>
       </div>
     </div>
