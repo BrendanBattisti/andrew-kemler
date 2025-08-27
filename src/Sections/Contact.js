@@ -1,4 +1,64 @@
+import React, { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
+
 const Contact = () => {
+  const formRef = useRef();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    communicationMethod: "email",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleRadioChange = (method) => {
+    setFormData((prev) => ({
+      ...prev,
+      communicationMethod: method,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // You'll need to replace these with your actual EmailJS credentials
+      const result = await emailjs.sendForm(
+        "service_1tuew8j", // Replace with your EmailJS service ID
+        "template_ao101yr", // Replace with your EmailJS template ID
+        formRef.current,
+        "PK58mdRLEoSl_n8gz" // Replace with your EmailJS public key
+      );
+
+      console.log("Email sent successfully:", result.text);
+      setSubmitStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        communicationMethod: "email",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Email send failed:", error.text);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-whitebg">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -16,7 +76,10 @@ const Contact = () => {
                 </h2>
                 <div className="absolute bottom-0 w-full lg:p-11 p-5">
                   <div className="bg-white rounded-lg p-6 block">
-                    <a href="javascript:;" className="flex items-center mb-6">
+                    <a
+                      href="tel:585-690-9288"
+                      className="flex items-center mb-6"
+                    >
                       <svg
                         width="30"
                         height="30"
@@ -36,7 +99,10 @@ const Contact = () => {
                         585-690-9288
                       </h4>
                     </a>
-                    <a href="javascript:;" className="flex items-center mb-6">
+                    <a
+                      href="mailto:abkemler@ft.newyorklife.com"
+                      className="flex items-center mb-6"
+                    >
                       <svg
                         width="30"
                         height="30"
@@ -88,78 +154,124 @@ const Contact = () => {
 
           <div className="bg-gray-50 p-5 lg:p-11 lg:rounded-r-2xl rounded-2xl">
             <h2 className="leading-10 mb-10">Send me a message</h2>
-            <input
-              type="text"
-              className="w-full h-12 text-gray-600 placeholder-gray-400  shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Name"
-            />
-            <input
-              type="text"
-              className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Email"
-            />
-            <input
-              type="text"
-              className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Phone"
-            />
-            <div className="mb-10">
-              <h4 className="text-gray-500 text-lg font-normal leading-7 mb-4">
-                Preferred method of communication
-              </h4>
-              <div className="flex">
-                <div className="flex items-center mr-11">
-                  <input
-                    id="radio-group-1"
-                    type="radio"
-                    name="radio-group"
-                    className="hidden checked:bg-no-repeat checked:bg-center checked:border-indigo-500 checked:bg-indigo-100"
-                  />
-                  <label
-                    htmlFor="radio-group-1"
-                    className="flex items-center cursor-pointer text-gray-500 text-base font-normal leading-6"
-                  >
-                    <span className="border border-gray-300 rounded-full mr-2 w-4 h-4  ml-2 "></span>{" "}
-                    Email
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="radio-group-2"
-                    type="radio"
-                    name="radio-group"
-                    className="hidden checked:bg-no-repeat checked:bg-center checked:border-indigo-500 checked:bg-indigo-100"
-                  />
-                  <label
-                    htmlFor="radio-group-2"
-                    className="flex items-center cursor-pointer text-gray-500 text-base font-normal leading-6"
-                  >
-                    <span className="border border-gray-300  rounded-full mr-2 w-4 h-4  ml-2 "></span>{" "}
-                    Phone
-                  </label>
+
+            {/* Status Messages */}
+            {submitStatus === "success" && (
+              <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                Thank you! Your message has been sent successfully. I'll get
+                back to you soon.
+              </div>
+            )}
+
+            {submitStatus === "error" && (
+              <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                Sorry, there was an error sending your message. Please try again
+                or contact me directly.
+              </div>
+            )}
+
+            <form ref={formRef} onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
+                placeholder="Name"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
+                placeholder="Email"
+                required
+              />
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className="w-full h-12 text-gray-600 placeholder-gray-400 shadow-sm bg-transparent text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
+                placeholder="Phone"
+              />
+              <div className="mb-10">
+                <h4 className="text-gray-500 text-lg font-normal leading-7 mb-4">
+                  Preferred method of communication
+                </h4>
+                <div className="flex">
+                  <div className="flex items-center mr-11">
+                    <input
+                      id="radio-group-1"
+                      type="radio"
+                      name="contact"
+                      value="email"
+                      checked={formData.communicationMethod === "email"}
+                      onChange={() => handleRadioChange("email")}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+                    />
+                    <label
+                      htmlFor="radio-group-1"
+                      className="flex items-center cursor-pointer text-gray-500 text-base font-normal leading-6 ml-2"
+                    >
+                      Email
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      id="radio-group-2"
+                      type="radio"
+                      name="contact"
+                      value="phone"
+                      checked={formData.communicationMethod === "phone"}
+                      onChange={() => handleRadioChange("phone")}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+                    />
+                    <label
+                      htmlFor="radio-group-2"
+                      className="flex items-center cursor-pointer text-gray-500 text-base font-normal leading-6 ml-2"
+                    >
+                      Phone
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-            <input
-              type="text"
-              className="w-full h-12 text-gray-600 placeholder-gray-400 bg-transparent text-lg shadow-sm font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
-              placeholder="Message"
-            />
-            <button
-              className="w-full md:mb-32 mb-4 mt-4 justify-center
-    px-4 py-2
-    rounded-full
-    bg-primary
-    border border-transparent
-    hover:bg-white/10
-    hover:text-primary
-    hover:border-primary
-    transition-all duration-300 ease-in-out
-    whitespace-nowrap
-    flex items-center"
-            >
-              Send
-            </button>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows="4"
+                className="w-full text-gray-600 placeholder-gray-400 bg-transparent text-lg shadow-sm font-normal leading-7 rounded-2xl border border-gray-200 focus:outline-none pl-4 pt-4 mb-10 resize-none"
+                placeholder="Message"
+                required
+              />
+              {/* Hidden field for timestamp */}
+              <input
+                type="hidden"
+                name="time"
+                value={new Date().toLocaleString()}
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full md:mb-32 mb-4 mt-4 justify-center
+                  px-4 py-2
+                  rounded-full
+                  border border-transparent
+                  transition-all duration-300 ease-in-out
+                  whitespace-nowrap
+                  flex items-center
+                  ${
+                    isSubmitting
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-primary hover:bg-white/10 hover:text-primary hover:border-primary"
+                  }`}
+              >
+                {isSubmitting ? "Sending..." : "Send"}
+              </button>
+            </form>
           </div>
         </div>
       </div>

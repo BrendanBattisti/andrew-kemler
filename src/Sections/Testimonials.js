@@ -17,7 +17,7 @@ const Testimonials = () => {
   // To show testimonials: Open dev tools (F12) and run: localStorage.setItem('showTestimonials', 'true')
   // To hide testimonials: Open dev tools (F12) and run: localStorage.setItem('showTestimonials', 'false')
   // Then refresh the page
-  const showTestimonials = localStorage.getItem("showTestimonials") === "true";
+  const showTestimonials = true;
 
   // If testimonials are disabled, don't render anything
   if (!showTestimonials) {
@@ -110,7 +110,7 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-whitebg pt-16 rounded-t-2xl">
+    <div className="w-full min-h-screen bg-whitebg pt-16">
       <div className="w-full md:w-3/5 mx-auto px-8 md:px-0">
         <h4 id="testimonials">Testimonials</h4>
         <h2 className="mt-6 mb-8">What My Clients Say.</h2>
