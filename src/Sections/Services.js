@@ -50,7 +50,7 @@ const Services = () => {
   );
 
   return (
-    <div className="w-full min-h-screen bg-whitebg-100 py-16 rounded-t-2xl">
+    <div className="w-full min-h-screen bg-whitebg-100 py-16">
       <div className="w-full md:w-3/5 mx-auto px-8 md:px-0">
         <h4 id="services">Services</h4>
         <h2 className="mt-6 mb-8">How I Can Help.</h2>

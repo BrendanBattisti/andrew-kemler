@@ -1,6 +1,6 @@
 const Footer = () => (
   <footer
-    className="w-full bg-white py-4 border-t border-base-300"
+    className="w-full bg-whitebg-100 py-4 border-t border-base-300"
     aria-label="Site disclaimer and copyright"
     style={{
       scrollSnapAlign: "start",
