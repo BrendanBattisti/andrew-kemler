@@ -145,7 +145,19 @@ const Contact = () => {
               className="w-full h-12 text-gray-600 placeholder-gray-400 bg-transparent text-lg shadow-sm font-normal leading-7 rounded-full border border-gray-200 focus:outline-none pl-4 mb-10"
               placeholder="Message"
             />
-            <button className="w-full md:mb-32 mb-4 mt-4 justify-center">
+            <button
+              className="w-full md:mb-32 mb-4 mt-4 justify-center
+    px-4 py-2
+    rounded-full
+    bg-primary
+    border border-transparent
+    hover:bg-white/10
+    hover:text-primary
+    hover:border-primary
+    transition-all duration-300 ease-in-out
+    whitespace-nowrap
+    flex items-center"
+            >
               Send
             </button>
           </div>

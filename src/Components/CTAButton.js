@@ -17,7 +17,7 @@ const CTAButton = ({ text }) => {
   "
       href="#contact"
     >
-      <h3 className="text-white">{text}</h3>
+      <p className="text-white">{text}</p>
       <FaArrowRight className="ml-4 my-auto text-white" />
     </a>
   );

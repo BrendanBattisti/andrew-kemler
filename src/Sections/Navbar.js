@@ -12,7 +12,7 @@ const Navbar = () => {
         href={url}
         onClick={() => setIsOpen(false)} // close menu on click
       >
-        <h3 className="text-white">{text}</h3>
+        <p className="text-white">{text}</p>
       </a>
     );
   }
