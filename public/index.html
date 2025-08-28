@@ -2,12 +2,47 @@
 <html lang="en" data-theme="andrew">
   <head>
     <meta charset="utf-8" />
+
+    <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Critical CSS inline to prevent render blocking -->
+    <style>
+      /* Only truly critical CSS for initial render */
+      body { 
+        margin: 0; 
+        font-family: "Urbanist", sans-serif; 
+      }
+      /* Essential layout styles that prevent layout shift */
+      #root { 
+        min-height: 100vh; 
+      }
+      /* Prevent FOUC (Flash of Unstyled Content) */
+      .bg-primary { 
+        background-color: #1c549e; 
+      }
+      .bg-whitebg { 
+        background-color: white; 
+      }
+      .bg-whitebg-100 { 
+        background-color: #f9f9f7; 
+      }
+    </style>
+
+    <!-- Preload critical fonts -->
     <link
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript
+      ><link
+        href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    /></noscript>
+
     <title>
       Andrew Kemler - Financial Advisor | New York Life Insurance, Victor NY
     </title>
@@ -19,7 +54,15 @@
     <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/nyl-logo-1.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="canonical" href="https://andrewkemler.com/" />
-    <link href="./output.css" rel="stylesheet" />
+
+    <!-- Preload critical CSS -->
+    <link
+      rel="preload"
+      href="./output.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript><link href="./output.css" rel="stylesheet" /></noscript>
 
     <meta property="og:title" content="Andrew Kemler - Financial Advisor" />
     <meta name="twitter:card" content="summary_large_image" />

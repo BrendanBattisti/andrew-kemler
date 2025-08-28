@@ -17,7 +17,7 @@ const Testimonials = () => {
   // To show testimonials: Open dev tools (F12) and run: localStorage.setItem('showTestimonials', 'true')
   // To hide testimonials: Open dev tools (F12) and run: localStorage.setItem('showTestimonials', 'false')
   // Then refresh the page
-  const showTestimonials = true;
+  const showTestimonials = false;
 
   // If testimonials are disabled, don't render anything
   if (!showTestimonials) {
@@ -96,9 +96,9 @@ const Testimonials = () => {
       onClick={onClick}
     >
       {direction === "prev" ? (
-        <FaChevronLeft className="text-black" />
+        <FaChevronLeft className="text-black" aria-label="previous testimony" />
       ) : (
-        <FaChevronRight className="text-black" />
+        <FaChevronRight className="text-black" aria-label="next testimony" />
       )}
     </button>
   );
