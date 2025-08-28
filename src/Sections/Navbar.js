@@ -53,6 +53,9 @@ const Navbar = () => {
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="text-white p-2 rounded-md focus:outline-none bg-transparent"
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           {/* Hamburger */}
           <FiMenu
@@ -77,7 +80,12 @@ const Navbar = () => {
 
       {/* Mobile dropdown */}
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-black/70 px-6 py-4 md:hidden rounded-lg shadow-lg">
+        <div
+          id="mobile-menu"
+          className="absolute top-16 left-0 w-full bg-black/70 px-6 py-4 md:hidden rounded-lg shadow-lg"
+          role="navigation"
+          aria-label="Mobile navigation menu"
+        >
           <Links mobile />
         </div>
       )}

@@ -64,6 +64,36 @@
     />
     <noscript><link href="./output.css" rel="stylesheet" /></noscript>
 
+    <!-- DNS prefetch for performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+    <!-- Script to handle React-generated CSS files -->
+    <script>
+      // Preload React-generated CSS files to prevent render blocking
+      function preloadReactCSS() {
+        const links = document.querySelectorAll(
+          'link[href*="main."][href*=".css"]'
+        );
+        links.forEach((link) => {
+          if (link.rel === "stylesheet") {
+            link.rel = "preload";
+            link.as = "style";
+            link.onload = function () {
+              this.onload = null;
+              this.rel = "stylesheet";
+            };
+          }
+        });
+      }
+      // Run after DOM is ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", preloadReactCSS);
+      } else {
+        preloadReactCSS();
+      }
+    </script>
+
     <meta property="og:title" content="Andrew Kemler - Financial Advisor" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Andrew Kemler - Financial Advisor" />
