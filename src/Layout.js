@@ -9,8 +9,7 @@ import Testimonials from "./Sections/Testimonials";
 import { useState, useEffect } from "react";
 
 const Layout = () => {
-  const backgroundUrlDesktop =
-    process.env.PUBLIC_URL + "/imgs/background2.webp";
+  const backgroundUrlDesktop = process.env.PUBLIC_URL + "/imgs/background.webp";
   const backgroundUrlMobile =
     process.env.PUBLIC_URL + "/imgs/background2Mobile.webp";
   const breakpoint = 768;
