@@ -31,7 +31,7 @@ const Services = () => {
           <b>confidently</b> without sacrificing <b>security.</b>
         </p>
       ),
-      image: process.env.PUBLIC_URL + "/imgs/life-insurance.webp",
+      image: process.env.PUBLIC_URL + "/imgs/life-insurance2.webp",
     },
   ];
 
